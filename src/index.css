@@ -1,13 +1,306 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    color: #fff;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.ob-text-blue {
+    color: #064785;
+}
+
+.ob-bg-blue {
+    background: #064785;
+}
+
+.ob-wrap {
+    min-height: 100%;
+}
+
+/*
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem 0.5rem;
+}
+*/
+.App {
+    min-width: 400px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    /*display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;*/
+    position: relative;
+    top: 66px;
+    padding: 1rem 0.5rem;
+    background: #fff;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    color: #fff;
+    width: 100%;
+    max-width: 420px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    /*background-color: rgba(0, 0, 0, 0.4);*/
+    background-color: #064785;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 0 black;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+}
+
+a,
+a:visited {
+    color: #fff;
+}
+
+input[type='text'],
+input[type='password'],
+button,
+textarea {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+}
+
+label,
+button {
+    margin-top: 1rem;
+}
+
+button {
+    padding: 0.5rem;
+}
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-left: 0.5rem solid firebrick;
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.successmsg {
+    background-color: lightgreen;
+    color: green;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-left: 0.5rem solid green;
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.line {
+    display: inline-block;
+}
+
+.navbar {
+}
+
+.persistCheck {
+    font-size: 0.75rem;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.persistCheck label {
+    margin: 0;
+}
+
+[type='checkbox'] {
+    height: 20px;
+    width: 20px;
+    margin: 0 5px 2px 2px;
+}
+
+.jumbotron {
+    background: #064785;
+    color: white;
+    padding-bottom: 80px;
+    margin: 0;
+}
+.jumbotron .btn-primary {
+    background: #ffbe26;
+    border-color: #000;
+    color: #000;
+}
+.jumbotron .btn-primary:hover {
+    background: #ffe29d;
+}
+.jumbotron p {
+    color: #fff;
+    max-width: 75%;
+    margin: 1em auto 2em;
+}
+.navbar + .jumbotron {
+    margin-top: -20px;
+}
+.jumbotron .lang-logo {
+    display: block;
+    background: #cccbca;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    border: 2px solid white;
+}
+.jumbotron .lang-logo img {
+    max-width: 100%;
+}
+
+.jumbotron-error {
+    background: #cccbca;
+    color: black;
+    height: 100vh;
+    width: 100vw;
+}
+
+.container {
+    margin-left: 10px;
+}
+.searchForm label {
+    position: absolute;
+    left: -99999px;
+}
+
+.icon-width {
+    max-width: 40px;
+}
+
+.callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    color: rgb(110, 223, 246);
+    background-color: rgb(3, 40, 48);
+    border-left: 1rem solid rgb(8, 121, 144);
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.callout button {
+    background-color: rgb(8, 121, 144);
+    color: #fff;
+    border-color: #043238;
+}
+.callout button:hover {
+    background-color: rgb(36, 155, 179);
+}
+
+.callout-info {
+}
+.callout-warning {
+}
+.callout-danger {
+}
+
+.dash-edit {
+    color: #043238;
+}
+.dash-edit:hover {
+    color: #0a515a;
+}
+
+.dash-delete {
+    color: firebrick;
+}
+.dash-delete:hover {
+    color: crimson;
+}
+
+.btn-primary {
+    background: #ffbe26;
+    border-color: #000;
+    color: #000;
+}
+
+.table-footer-spacing {
+    margin-bottom: 4rem;
+}
+
+.fade-5 {
+    animation: fadeOut 10s;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
