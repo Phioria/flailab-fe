@@ -27,14 +27,6 @@ const PersistLogin = () => {
         // eslint-disable-next-line
     }, []);
 
-    useEffect(() => {
-        console.log(`isLoading: ${isLoading}`);
-        console.log(`aT: ${JSON.stringify(auth?.accessToken)}`);
-        console.log(`Roles: ${JSON.stringify(auth?.roles)}`);
-        console.log(`Auth Object: ${JSON.stringify(auth)}`);
-        // eslint-disable-next-line
-    }, [isLoading]);
-
     return (
         <>
             {!persist ? (
