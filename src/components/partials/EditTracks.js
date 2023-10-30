@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import EditTracksRow from './EditTracksRow';
 import { Container, Modal, Table, Button } from 'react-bootstrap';
+import useAuth from '../../hooks/useAuth';
 
 // Receive the tracks to be edited from AllTracks.js
 // Display them in a form table for editing
@@ -8,6 +9,30 @@ const EditTracks = ({ tracks, setTracks, selectedTracks, setSelectedTracks, hand
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [editTracks, setEditTracks] = useState([]);
     const [submitTracks, setSubmitTracks] = useState([]);
+    const { auth } = useAuth();
+
+    const allowedKeys = [
+        'rid',
+        'dataset',
+        'species',
+        'track_name',
+        'sequencing_type',
+        'file_location',
+        'notes',
+        'mutant',
+        'tissue',
+        'cell_line',
+        'development_stage',
+        'sex',
+        'paper',
+        'srr_id',
+        'total_mapped',
+        'percent_aligned',
+        'percent_uniquely_mapped',
+        'submitted_by',
+        'author',
+        'project',
+    ];
 
     // Once component loads, filter the 'tracks' array for rids that match the ids in selectedTracks
     useEffect(() => {
@@ -17,7 +42,123 @@ const EditTracks = ({ tracks, setTracks, selectedTracks, setSelectedTracks, hand
         // ! Could I possibly do this with a single state? Worried about an endless loop here with some of these useEffects in the individual row component
     }, [tracks, selectedTracks]);
 
-    const handleEditTracks = () => {};
+    const isValidKeys = (track) => {
+        const keys = Object.keys(track);
+
+        // Test to make sure all object keys are allowed
+        const result = keys.every((key) => allowedKeys.includes(key));
+
+        return result;
+    };
+
+    const isNotNullOrUndefined = (track, field) => {
+        const result = (track[field] !== null) & (track[field] !== undefined);
+        return result;
+    };
+
+    const isValidNumber = (input) => {
+        console.info(`Number Input: ${input}`);
+        return !isNaN(parseFloat(input.replace('%', '')));
+    };
+
+    const isValidAdminTrack = (track) => {
+        // Admin Required Fields  = dataset, species, sequencing_type, file_location, tissue
+
+        const datasetResult = isNotNullOrUndefined(track, 'dataset') && track.dataset.trim().length;
+        const speciesResult = isNotNullOrUndefined(track, 'species') && track.species.trim().length;
+        const sequencingTypeResult =
+            isNotNullOrUndefined(track, 'sequencing_type') && track.sequencing_type.trim().length;
+        const fileLocationResult = isNotNullOrUndefined(track, 'file_location') && track.file_location.trim().length;
+        const tissueResult = isNotNullOrUndefined(track, 'tissue') && track.tissue.trim().length;
+
+        return datasetResult && speciesResult && sequencingTypeResult && fileLocationResult && tissueResult;
+    };
+
+    const isValidEditorTrack = (track) => {
+        // Editor Required Fields = dataset, species, sequencing_type, file_location, tissue, (These 5 checked by isValidAdminTrack())
+        //                          track_name, mutant, sex, author,
+        //                          total_mapped, percent_aligned, percent_uniquely_mapped
+
+        // We can re-use the admin function here so we don't have to rewrite those particular checks
+        const adminResult = isValidAdminTrack(track);
+        const trackNameResult = isNotNullOrUndefined(track, 'track_name') && track.track_name.trim().length;
+        const mutantResult = isNotNullOrUndefined(track, 'mutant') && track.mutant.trim().length;
+        const sexResult = isNotNullOrUndefined(track, 'sex') && track.sex.trim().length;
+        const authorResult = isNotNullOrUndefined(track, 'author') && track.author.trim().length;
+
+        // Extra check here to ensure the input is actually a number
+        const totalMappedResult =
+            isNotNullOrUndefined(track, 'total_mapped') &&
+            track.total_mapped.trim().length &&
+            isValidNumber(track.total_mapped);
+        const percentAlignedResult =
+            isNotNullOrUndefined(track, 'percent_aligned') &&
+            track.percent_aligned.trim().length &&
+            isValidNumber(track.percent_aligned);
+        const percentUniquelyMappedResult =
+            isNotNullOrUndefined(track, 'percent_uniquely_mapped') &&
+            track.percent_uniquely_mapped.trim().length &&
+            isValidNumber(track.percent_uniquely_mapped);
+
+        return (
+            adminResult &&
+            trackNameResult &&
+            mutantResult &&
+            sexResult &&
+            authorResult &&
+            totalMappedResult &&
+            percentAlignedResult &&
+            percentUniquelyMappedResult
+        );
+    };
+
+    const handleEditTracks = () => {
+        // TODO: Add in data validation here
+        // Grab the user roles, and with that determine which fields are allowed to be null
+        // psuedo code: map over all the submitTracks, check each field to see if it's null, and if so, is that allowed by role?
+        // If any problems arise, set an errorMsg and allow the user to correct the problem
+        // We can deal with most of these issues directly in the EditTracksRow component by using validation there before they are even submitted
+        // But this will be a good final check before it heads to the server
+        // If everything looks good, then use axiosprivate to submit a put request with the data object set in the second param
+        //console.log(submitTracks);
+
+        const roles = auth?.roles;
+        console.log(`Roles: ${JSON.stringify(roles)}`);
+
+        const highestRole = Math.max(...Object.values(roles));
+        if (highestRole !== 2600 && highestRole !== 1999) {
+            console.info(`highestRole: ${highestRole}`);
+            console.warn('How did you get here?');
+        }
+
+        const tracksHaveValidKeys = submitTracks.every((track) => isValidKeys(track));
+        if (!tracksHaveValidKeys) {
+            // Set error message and return
+            // Just console.warning for now
+            console.warn("Tracks don't have valid keys for some reason.");
+            return;
+        }
+
+        const tracksAreValid =
+            highestRole === 2600
+                ? submitTracks.every((track) => isValidAdminTrack(track))
+                : submitTracks.every((track) => isValidEditorTrack(track));
+
+        if (!tracksAreValid) {
+            // Set error message and return
+            // Just console.warn for now
+            console.warn('Not all submitted tracks were valid');
+            return;
+        }
+        // If we make it to here, lets try to submit the tracks to the server for updating
+        try {
+            console.log('made it to the try catch block');
+            console.log(`Highest Role: ${highestRole}`);
+            handleClose(); // We only want handle close here as we'll want custom error message for errors
+        } catch (err) {
+            // No calls to handleClose here...instead, set the errMsg, close just the modal, but keep the selectedTracks
+        }
+    };
 
     return (
         <main className="mt-3">
@@ -27,7 +168,9 @@ const EditTracks = ({ tracks, setTracks, selectedTracks, setSelectedTracks, hand
                 </Modal.Header>
                 <Modal.Body>
                     Are you sure you want to edit{' '}
-                    {selectedTracks.length > 1 ? `these ${selectedTracks.length} tracks?` : `this ${selectedTracks.length} track?`}
+                    {selectedTracks.length > 1
+                        ? `these ${selectedTracks.length} tracks?`
+                        : `this ${selectedTracks.length} track?`}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowConfirmation(false)}>
@@ -66,7 +209,12 @@ const EditTracks = ({ tracks, setTracks, selectedTracks, setSelectedTracks, hand
                     </thead>
                     <tbody>
                         {editTracks.map((track, i) => (
-                            <EditTracksRow track={track} submitTracks={submitTracks} setSubmitTracks={setSubmitTracks} key={i} />
+                            <EditTracksRow
+                                track={track}
+                                submitTracks={submitTracks}
+                                setSubmitTracks={setSubmitTracks}
+                                key={i}
+                            />
                         ))}
                     </tbody>
                 </Table>

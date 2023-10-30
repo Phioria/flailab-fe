@@ -11,6 +11,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
 
     // Anytime the row changes, update the parent rows object
     useEffect(() => {
+        // TODO: Find better way to manage state here without running into an endless loop
         // Having an issue here where this is endlessly running because all the rows think they're changing
         // Going to try an if statement to see if the initial track matches the row and only update when then don't
         // The problem seems to be with the dependency array
@@ -18,12 +19,21 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
         // Not sure what the best solution is yet
         // possibly useRef or
 
+        // Apparently there are multiple issues here.
+        // Part of the problem is that JS doesn't do deep comparisons of objects by default
+        // It just compares by reference, so if you use a setter function with a new object
+        // that is identical to the old object, JS will think they're different objects.
+        // The main issue is that when submitTracks is included in the dependency array,
+        // an endless loop occurs. I'm sure there is a much better way to handle this,
+        // but for now, I'll leave out submitTracks from the array and just live with the react warning
+
         if (row !== track) {
             console.log('running');
             const otherTracks = submitTracks.filter((track) => track.rid !== id);
             setSubmitTracks([...otherTracks, row]);
             //console.log(submitTracks);
         }
+        // eslint-disable-next-line
     }, [row]);
 
     // Admin Required Fields = dataset, species, sequencing_type, file_location, tissue
