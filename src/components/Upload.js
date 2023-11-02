@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import { newAbortSignal } from '../api/axios';
 import Header from './Header';
 
 const Upload = () => {
@@ -20,7 +21,6 @@ const Upload = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const controller = new AbortController();
 
         const formData = new FormData();
         formData.append('newFile', uploadFile);
@@ -29,7 +29,7 @@ const Upload = () => {
             const response = await axiosPrivate.post('/records', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
                 withCredentials: true,
-                signal: controller.signal,
+                signal: newAbortSignal(5000),
             });
 
             setSuccessMsg(response.data.message);
@@ -77,9 +77,10 @@ const Upload = () => {
                         <strong>Spelling is important, though column order is not.</strong>
                         <br />
                         <br />
-                        <u>dataset</u>, <u>species</u>, <u>track_name</u>, <u>sequencing_type</u>, <u>file_location</u>, <u>mutant</u>, <u>tissue</u>,{' '}
-                        <u>sex</u>, <br />
-                        <u>total_mapped</u>, <u>percent_aligned</u>, <u>percent_uniquely_mapped</u>, <u>author</u>, cell_line, <br />
+                        <u>dataset</u>, <u>species</u>, <u>track_name</u>, <u>sequencing_type</u>, <u>file_location</u>,{' '}
+                        <u>mutant</u>, <u>tissue</u>, <u>sex</u>, <br />
+                        <u>total_mapped</u>, <u>percent_aligned</u>, <u>percent_uniquely_mapped</u>, <u>author</u>,
+                        cell_line, <br />
                         development_stage, project, paper, srr_id, notes <br />
                         <br />
                         All column headers listed above are required to be present in the submitted file, however <br />

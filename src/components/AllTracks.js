@@ -257,7 +257,17 @@ const AllTracks = () => {
             });
             setSearchResults(filteredResults);
         }
-    }, [tracks, searchRow1, searchRow2, searchRow3, searchRow4, searchRow5, searchRow6, setSearchResults, numberOfSearchRows]);
+    }, [
+        tracks,
+        searchRow1,
+        searchRow2,
+        searchRow3,
+        searchRow4,
+        searchRow5,
+        searchRow6,
+        setSearchResults,
+        numberOfSearchRows,
+    ]);
 
     // useEffect(() => {
     //     // todo consider changing the column object to an array with 2 items instead of an object
@@ -498,7 +508,9 @@ const AllTracks = () => {
             //console.log(`Remaining Tracks: ${remainingTracks.length}`);
             setTracks(remainingTracks);
             setSuccessMsg(
-                selectedTracks.length > 1 ? `Successfully deleted ${selectedTracks.length} tracks.` : `Successfully deleted ${selectedTracks.length} track.`
+                selectedTracks.length > 1
+                    ? `Successfully deleted ${selectedTracks.length} tracks.`
+                    : `Successfully deleted ${selectedTracks.length} track.`
             );
             successRef.current.focus();
         } catch (err) {
@@ -552,7 +564,9 @@ const AllTracks = () => {
                             </Modal.Header>
                             <Modal.Body>
                                 Are you sure you want to delete{' '}
-                                {selectedTracks.length > 1 ? `these ${selectedTracks.length} tracks?` : `this ${selectedTracks.length} track?`}
+                                {selectedTracks.length > 1
+                                    ? `these ${selectedTracks.length} tracks?`
+                                    : `this ${selectedTracks.length} track?`}
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={handleClose}>
@@ -564,7 +578,11 @@ const AllTracks = () => {
                             </Modal.Footer>
                         </Modal>
                         <Container>
-                            <p ref={errRef} className={errMsg ? 'errmsg w-50 fade-5' : 'offscreen'} aria-live="assertive">
+                            <p
+                                ref={errRef}
+                                className={errMsg ? 'errmsg w-50 fade-5' : 'offscreen'}
+                                aria-live="assertive"
+                            >
                                 {errMsg}
                             </p>
                             <p ref={successRef} className={successMsg ? 'successmsg w-50 fade-5' : 'offscreen'}>
@@ -575,12 +593,22 @@ const AllTracks = () => {
                             </form>
                         </Container>
                         {searchResults.length ? (
-                            <Table striped bordered hover className={selectedTracks.length ? 'table-footer-spacing' : 'mb-0'}>
+                            <Table
+                                striped
+                                bordered
+                                hover
+                                className={selectedTracks.length ? 'table-footer-spacing' : 'mb-0'}
+                            >
                                 <thead>
                                     <tr>
                                         <th>
                                             <div>
-                                                <input className="form-check-input" type="checkbox" value="" id="select-all" />
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    value=""
+                                                    id="select-all"
+                                                />
                                                 <label className="form-check-label offscreen" htmlFor="select-all">
                                                     Select All
                                                 </label>
@@ -672,12 +700,22 @@ const AllTracks = () => {
                         <footer expand="lg" className="fixed-bottom bg-dark">
                             <div className="container-fluid d-sm-flex flex-row justify-content-center align-items-center">
                                 <h5 className="mt-2" style={{ color: 'white' }}>
-                                    {selectedTracks.length === 1 ? `${selectedTracks.length} track selected` : `${selectedTracks.length} tracks selected`}
+                                    {selectedTracks.length === 1
+                                        ? `${selectedTracks.length} track selected`
+                                        : `${selectedTracks.length} tracks selected`}
                                 </h5>
-                                <button className={width < 576 ? 'btn btn-primary mt-0 mb-2 me-3' : 'btn btn-primary my-3 mx-3'} onClick={handleEditTracks}>
+                                <button
+                                    className={
+                                        width < 576 ? 'btn btn-primary mt-0 mb-2 me-3' : 'btn btn-primary my-3 mx-3'
+                                    }
+                                    onClick={handleEditTracks}
+                                >
                                     Edit
                                 </button>
-                                <button className={width < 576 ? 'btn btn-danger mt-0 mb-2' : 'btn btn-danger my-3'} onClick={() => setShowDelete(true)}>
+                                <button
+                                    className={width < 576 ? 'btn btn-danger mt-0 mb-2' : 'btn btn-danger my-3'}
+                                    onClick={() => setShowDelete(true)}
+                                >
                                     Delete
                                 </button>
                             </div>

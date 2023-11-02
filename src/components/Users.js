@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import { newAbortSignal } from '../api/axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { OverlayTrigger, Table, Tooltip } from 'react-bootstrap';
 import { Pen, Trash } from 'react-bootstrap-icons';
@@ -25,12 +26,11 @@ const Users = () => {
 
     useEffect(() => {
         let isMounted = true;
-        const controller = new AbortController();
 
         const getUsers = async () => {
             try {
                 const response = await axiosPrivate.get('/users', {
-                    signal: controller.signal,
+                    signal: newAbortSignal(5000),
                 });
                 console.log(response.data);
                 isMounted && setUsers(response.data);
@@ -47,7 +47,7 @@ const Users = () => {
 
         return () => {
             isMounted = false;
-            controller.abort();
+            newAbortSignal();
         };
     }, [axiosPrivate, location, navigate]);
 
@@ -82,10 +82,9 @@ const Users = () => {
     const handleConfirmDelete = async () => {
         try {
             const DELETE_URL = `/users/${deleteUser.id}`;
-            const controller = new AbortController();
 
             const response = await axiosPrivate.delete(DELETE_URL, {
-                signal: controller.signal,
+                signal: newAbortSignal(5000),
             });
             setUsers(users.filter((user) => user.uid !== deleteUser.id));
             console.log(response.data);
@@ -109,7 +108,6 @@ const Users = () => {
     const handleConfirmEdit = async () => {
         try {
             const UPDATE_URL = `/users/${editUser.id}`;
-            const controller = new AbortController();
 
             let PAYLOAD = {
                 User: 1500,
@@ -124,7 +122,7 @@ const Users = () => {
             console.log(PAYLOAD);
 
             const response = await axiosPrivate.put(UPDATE_URL, PAYLOAD, {
-                signal: controller.signal,
+                signal: newAbortSignal(5000),
             });
             console.log(response);
             // TODO: Update the user in state to have the correct new roles
@@ -175,7 +173,12 @@ const Users = () => {
                     Select the new roles {editUser.username} should have: <br />
                     <form>
                         <div className="inline-flex align-middle">
-                            <input className="me-3" id="editor" type="checkbox" onChange={() => updateRoles('editor')} />
+                            <input
+                                className="me-3"
+                                id="editor"
+                                type="checkbox"
+                                onChange={() => updateRoles('editor')}
+                            />
                             <label htmlFor="editor">Editor</label>
                         </div>
                         <div className="inline-flex align-middle">
@@ -225,7 +228,10 @@ const Users = () => {
                                                 <Pen onClick={() => handleEditUser(user)} className="mx-2 dash-edit" />
                                             </OverlayTrigger>
                                             <OverlayTrigger placement="top" overlay={deleteTooltip}>
-                                                <Trash onClick={() => handleDeleteUser(user)} className="me-2 dash-delete" />
+                                                <Trash
+                                                    onClick={() => handleDeleteUser(user)}
+                                                    className="me-2 dash-delete"
+                                                />
                                             </OverlayTrigger>
                                         </>
                                     )}
