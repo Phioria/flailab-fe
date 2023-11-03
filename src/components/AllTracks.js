@@ -553,6 +553,12 @@ const AllTracks = () => {
                     setTracks={setTracks}
                     selectedTracks={selectedTracks}
                     setSelectedTracks={setSelectedTracks}
+                    errMsg={errMsg}
+                    setErrMsg={setErrMsg}
+                    errRef={errRef}
+                    successRef={successRef}
+                    setSuccessMsg={setSuccessMsg}
+                    handleMsgReset={handleMsgReset}
                     handleClose={handleClose}
                 />
             ) : (

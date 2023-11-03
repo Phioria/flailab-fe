@@ -2,10 +2,26 @@ import { useState, useEffect } from 'react';
 import EditTracksRow from './EditTracksRow';
 import { Container, Modal, Table, Button } from 'react-bootstrap';
 import useAuth from '../../hooks/useAuth';
+import { newAbortSignal } from '../../api/axios';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+const UPDATE_URL = '/records';
 
 // Receive the tracks to be edited from AllTracks.js
 // Display them in a form table for editing
-const EditTracks = ({ tracks, setTracks, selectedTracks, setSelectedTracks, handleClose }) => {
+const EditTracks = ({
+    tracks,
+    setTracks,
+    selectedTracks,
+    setSelectedTracks,
+    errMsg,
+    setErrMsg,
+    errRef,
+    setSuccessMsg,
+    successRef,
+    handleMsgReset,
+    handleClose,
+}) => {
+    const axiosPrivate = useAxiosPrivate();
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [editTracks, setEditTracks] = useState([]);
     const [submitTracks, setSubmitTracks] = useState([]);
@@ -112,7 +128,7 @@ const EditTracks = ({ tracks, setTracks, selectedTracks, setSelectedTracks, hand
         );
     };
 
-    const handleEditTracks = () => {
+    const handleEditTracks = async () => {
         // TODO: Add in data validation here
         // Grab the user roles, and with that determine which fields are allowed to be null
         // psuedo code: map over all the submitTracks, check each field to see if it's null, and if so, is that allowed by role?
@@ -152,12 +168,29 @@ const EditTracks = ({ tracks, setTracks, selectedTracks, setSelectedTracks, hand
         }
         // If we make it to here, lets try to submit the tracks to the server for updating
         try {
-            console.log('made it to the try catch block');
-            console.log(`Highest Role: ${highestRole}`);
-            handleClose(); // We only want handle close here as we'll want custom error message for errors
+            const response = await axiosPrivate.put(UPDATE_URL, submitTracks, {
+                signal: newAbortSignal(5000),
+            });
+            // Now we need to update the existing tracks in state to make sure the changes are reflected locally
+            const submitTracksRids = submitTracks.map((track) => track.rid);
+            const remainingTracks = tracks.filter((track) => !submitTracksRids.includes(track.rid));
+            setTracks([...submitTracks, ...remainingTracks]);
+
+            setSuccessMsg(response.data.message || 'Success');
+            //successRef.current.focus(); // ! Right now, the reference doesn't exist in this modal and won't exist until handleClose();
+            // ! Consider setting successRef or errRef after handleClose
         } catch (err) {
-            // No calls to handleClose here...instead, set the errMsg, close just the modal, but keep the selectedTracks
+            // TODO: Consider keeping the selected tracks on this page and not closing the modal if we get an error
+            // todo: Would need to move the handleClose() and handleMsgReset() functions into the try block and
+            // todo: have our own custom handling here.
+            console.error(err.message);
+            setErrMsg(err.message);
+            //errRef.current.focus(); // ! same as above
         }
+
+        handleClose();
+        //errMsg ? errRef.current.focus() : successRef.current.focus();
+        handleMsgReset();
     };
 
     return (
