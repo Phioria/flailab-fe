@@ -1,7 +1,6 @@
 import Register from './components/Register';
 import Login from './components/Login';
 import Admin from './components/Admin';
-import LinkPage from './components/LinkPage';
 import Missing from './components/Missing';
 import Unauthorized from './components/Unauthorized';
 import Home from './components/Home';
@@ -35,7 +34,6 @@ function App() {
                     <Route path="reset" element={<Reset />} />
                     <Route path="reset/:id/:token" element={<ResetLink />} />
                     <Route path="verify-email/:id/:token" element={<ValidateEmail />} />
-                    <Route path="linkpage" element={<LinkPage />} />
                     <Route path="unauthorized" element={<Unauthorized />} />
 
                     {/* private routes */}
