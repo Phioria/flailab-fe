@@ -44,6 +44,7 @@ const Login = () => {
             });
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
+            console.log(`[LOGIN] - Receivied Roles: ${roles}`);
             setAuth({ user, pwd, roles, accessToken });
             setUser('');
             setPwd('');
@@ -99,16 +100,33 @@ const Login = () => {
                     <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live="assertive">
                         {errMsg}
                     </p>
-                    <button onClick={handleReset} className={needsReset ? 'mt-2 mb-3 w-75 btn btn-primary' : 'offscreen'}>
+                    <button
+                        onClick={handleReset}
+                        className={needsReset ? 'mt-2 mb-3 w-75 btn btn-primary' : 'offscreen'}
+                    >
                         Resend Email
                     </button>
                     {emailSent && <p className="successmsg">E-mail Sent!</p>}
                     <h1>Sign In</h1>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="username">E-mail Address:</label>
-                        <input type="text" id="username" ref={userRef} autoComplete="off" onChange={(e) => setUser(e.target.value)} value={user} required />
+                        <input
+                            type="text"
+                            id="username"
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={(e) => setUser(e.target.value)}
+                            value={user}
+                            required
+                        />
                         <label htmlFor="password">Password:</label>
-                        <input type="password" id="password" onChange={(e) => setPwd(e.target.value)} value={pwd} required />
+                        <input
+                            type="password"
+                            id="password"
+                            onChange={(e) => setPwd(e.target.value)}
+                            value={pwd}
+                            required
+                        />
                         <button className="mt-4 w-50 btn btn-primary">Sign In</button>
                         <div className="persistCheck">
                             <input type="checkbox" id="persist" onChange={togglePersist} checked={persist} />

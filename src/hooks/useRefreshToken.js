@@ -9,8 +9,8 @@ const useRefreshToken = () => {
             withCredentials: true, // This is required to allow cookies to be sent with request
         });
         setAuth((prev) => {
-            console.log(JSON.stringify(prev));
-            console.log(response.data.accessToken);
+            //console.log(JSON.stringify(prev));
+            //console.log(response.data.accessToken);
             return {
                 ...prev,
                 roles: response.data.roles,
