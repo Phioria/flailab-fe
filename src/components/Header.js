@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -24,7 +24,7 @@ const Header = () => {
         await logout();
         navigate('/login');
     };
-
+    // <Link to="/reset">Reset Password</Link>
     return (
         <Navbar expand="lg" className="navbar fixed-top navbar-dark bg-dark">
             <Container className="ms-3">
@@ -37,9 +37,9 @@ const Header = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto" defaultActiveKey={location.pathname} as="ul">
                         <Nav.Item as="li" className="d-flex">
-                            <Nav.Link href="/" className="d-flex align-items-center">
+                            <Link to="/" className="d-flex align-items-center">
                                 <HomeIcon className="me-1" /> Home
-                            </Nav.Link>
+                            </Link>
                         </Nav.Item>
                         {/* Always Show Home */}
                         {/* Only Show /records, /upload, /logout when signed in */}
@@ -48,33 +48,33 @@ const Header = () => {
                         {Object.keys(auth).length ? (
                             <>
                                 <Nav.Item as="li" className="d-flex">
-                                    <Nav.Link href="/records" className="d-flex align-items-center">
+                                    <Link to="/records" className="d-flex align-items-center">
                                         <TracksIcon className="me-1" /> All Tracks
-                                    </Nav.Link>
+                                    </Link>
                                 </Nav.Item>
                                 <Nav.Item as="li" className="d-flex">
-                                    <Nav.Link href="/upload" className="d-flex align-items-center">
+                                    <Link to="/upload" className="d-flex align-items-center">
                                         <UploadIcon className="me-1" /> Upload
-                                    </Nav.Link>
+                                    </Link>
                                 </Nav.Item>
                                 <Nav.Item as="li" className="d-flex">
-                                    <Nav.Link onClick={handleLogout} className="d-flex align-items-center">
+                                    <Link onClick={handleLogout} className="d-flex align-items-center">
                                         <SignOutIcon className="me-1" /> Sign Out
-                                    </Nav.Link>
+                                    </Link>
                                 </Nav.Item>
                             </>
                         ) : (
                             <>
                                 <Nav.Item as="li" className="d-flex">
-                                    <Nav.Link href="/register" className="d-flex align-items-center">
+                                    <Link to="/register" className="d-flex align-items-center">
                                         <RegisterIcon className="me-1" /> Register
-                                    </Nav.Link>
+                                    </Link>
                                 </Nav.Item>
 
                                 <Nav.Item as="li" className="d-flex">
-                                    <Nav.Link href="/login" className="d-flex align-items-center">
+                                    <Link to="/login" className="d-flex align-items-center">
                                         <SignInIcon className="me-1" /> Sign In
-                                    </Nav.Link>
+                                    </Link>
                                 </Nav.Item>
                             </>
                         )}
