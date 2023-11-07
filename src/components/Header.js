@@ -29,9 +29,9 @@ const Header = () => {
         <Navbar expand="lg" className="navbar fixed-top navbar-dark bg-dark">
             <Container className="ms-3">
                 <span>
-                    <Navbar.Brand className="align-items-center" href="/">
+                    <Link to="/" className="align-items-center navbar-brand n-link">
                         OmicsBase
-                    </Navbar.Brand>
+                    </Link>
                 </span>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
