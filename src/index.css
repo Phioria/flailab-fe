@@ -163,7 +163,12 @@ button {
     display: inline-block;
 }
 
-.navbar {
+a.navbar {
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background: none;
+    border: 0;
 }
 
 .persistCheck {
