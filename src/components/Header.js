@@ -37,7 +37,7 @@ const Header = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto" defaultActiveKey={location.pathname} as="ul">
                         <Nav.Item as="li" className="d-flex">
-                            <Link to="/" className="d-flex align-items-center">
+                            <Link to="/" className="d-flex align-items-center n-link">
                                 <HomeIcon className="me-1" /> Home
                             </Link>
                         </Nav.Item>
@@ -48,17 +48,17 @@ const Header = () => {
                         {Object.keys(auth).length ? (
                             <>
                                 <Nav.Item as="li" className="d-flex">
-                                    <Link to="/records" className="d-flex align-items-center">
+                                    <Link to="/records" className="d-flex align-items-center n-link">
                                         <TracksIcon className="me-1" /> All Tracks
                                     </Link>
                                 </Nav.Item>
                                 <Nav.Item as="li" className="d-flex">
-                                    <Link to="/upload" className="d-flex align-items-center">
+                                    <Link to="/upload" className="d-flex align-items-center n-link">
                                         <UploadIcon className="me-1" /> Upload
                                     </Link>
                                 </Nav.Item>
                                 <Nav.Item as="li" className="d-flex">
-                                    <Link onClick={handleLogout} className="d-flex align-items-center">
+                                    <Link onClick={handleLogout} className="d-flex align-items-center n-link">
                                         <SignOutIcon className="me-1" /> Sign Out
                                     </Link>
                                 </Nav.Item>
@@ -66,13 +66,13 @@ const Header = () => {
                         ) : (
                             <>
                                 <Nav.Item as="li" className="d-flex">
-                                    <Link to="/register" className="d-flex align-items-center">
+                                    <Link to="/register" className="d-flex align-items-center n-link">
                                         <RegisterIcon className="me-1" /> Register
                                     </Link>
                                 </Nav.Item>
 
                                 <Nav.Item as="li" className="d-flex">
-                                    <Link to="/login" className="d-flex align-items-center">
+                                    <Link to="/login" className="d-flex align-items-center n-link">
                                         <SignInIcon className="me-1" /> Sign In
                                     </Link>
                                 </Nav.Item>

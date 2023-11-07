@@ -163,7 +163,7 @@ button {
     display: inline-block;
 }
 
-a.navbar {
+.n-link {
     display: block;
     padding: 0.5rem 1rem;
     text-decoration: none;
