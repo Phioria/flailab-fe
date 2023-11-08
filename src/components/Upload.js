@@ -77,14 +77,16 @@ const Upload = () => {
                         <strong>Spelling is important, though column order is not.</strong>
                         <br />
                         <br />
-                        <u>dataset</u>, <u>species</u>, <u>track_name</u>, <u>sequencing_type</u>, <u>file_location</u>,{' '}
-                        <u>mutant</u>, <u>tissue</u>, <u>sex</u>, <br />
-                        <u>total_mapped</u>, <u>percent_aligned</u>, <u>percent_uniquely_mapped</u>, <u>author</u>,
-                        cell_line, <br />
+                        <strong>dataset</strong>, <strong>species</strong>, <strong>track_name</strong>,{' '}
+                        <strong>sequencing_type</strong>, <strong>file_location</strong>, <strong>mutant</strong>,{' '}
+                        <strong>tissue</strong>, <strong>sex</strong>, <br />
+                        <strong>total_mapped</strong>, <strong>percent_aligned</strong>,{' '}
+                        <strong>percent_uniquely_mapped</strong>, <strong>author</strong>, cell_line, <br />
                         development_stage, project, paper, srr_id, notes <br />
                         <br />
                         All column headers listed above are required to be present in the submitted file, however <br />
-                        only the underlined headers are required to have data present in each corresponding cell. <br />
+                        only the headers in <strong>bold</strong> are required to have data present in each
+                        corresponding cell. <br />
                         If you feel you need to upload data that does not meet these requirements, feel free to
                         <br />
                         contact us, and arrangements can be made.
