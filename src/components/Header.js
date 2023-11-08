@@ -9,9 +9,11 @@ import {
     PersonPlus as RegisterIcon,
     BoxArrowInRight as SignInIcon,
     BoxArrowRight as SignOutIcon,
+    People as AdminIcon,
 } from 'react-bootstrap-icons';
 import useAuth from '../hooks/useAuth';
 import useLogout from '../hooks/useLogout';
+import Admin from './Admin';
 
 const Header = () => {
     const location = useLocation();
@@ -55,6 +57,11 @@ const Header = () => {
                                 <Nav.Item as="li" className="d-flex">
                                     <Link to="/upload" className="d-flex align-items-center n-link">
                                         <UploadIcon className="me-1" /> Upload
+                                    </Link>
+                                </Nav.Item>
+                                <Nav.Item as="li" className="d-flex">
+                                    <Link to="/admin" className="d-flex align-items-center n-link">
+                                        <AdminIcon className="me-1" /> Admin
                                     </Link>
                                 </Nav.Item>
                                 <Nav.Item as="li" className="d-flex">
