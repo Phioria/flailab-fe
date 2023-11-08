@@ -13,14 +13,13 @@ import {
 } from 'react-bootstrap-icons';
 import useAuth from '../hooks/useAuth';
 import useLogout from '../hooks/useLogout';
-import Admin from './Admin';
 
 const Header = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const logout = useLogout();
     const { auth } = useAuth();
-    document.title = 'OmicsBase';
+    document.title = 'FLai Lab Database';
 
     const handleLogout = async () => {
         await logout();
@@ -32,7 +31,7 @@ const Header = () => {
             <Container className="ms-3">
                 <span>
                     <Link to="/" className="align-items-center navbar-brand n-link">
-                        OmicsBase
+                        FLai Lab Database
                     </Link>
                 </span>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

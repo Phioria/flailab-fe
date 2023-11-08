@@ -193,6 +193,7 @@ button {
     background: #064785;
     color: white;
     padding-bottom: 80px;
+    height: 40vh;
     margin: 0;
 }
 .jumbotron .btn-primary {
