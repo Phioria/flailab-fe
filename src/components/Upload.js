@@ -29,7 +29,7 @@ const Upload = () => {
             const response = await axiosPrivate.post('/records', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
                 withCredentials: true,
-                signal: newAbortSignal(5000),
+                signal: newAbortSignal(20000), // 20 seconds for larger files
             });
 
             setSuccessMsg(response.data.message);
