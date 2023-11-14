@@ -539,14 +539,16 @@ const AllTracks = () => {
             return;
         }
 
+        const csvTracks = tracks.filter((track) => selectedTracks.includes(track.rid));
+
         let csvArray = [];
 
-        const csv_headers = Object.keys(selectedTracks[0]);
-        console.log(`csv_headers: ${csv_headers}`);
+        const csv_headers = Object.keys(csvTracks[0]);
+        //console.log(`csv_headers: ${csv_headers}`);
         csvArray.push(csv_headers);
 
-        selectedTracks.map((track) => {
-            console.log(track);
+        csvTracks.map((track) => {
+            //console.log(track);
             csvArray.push(Object.values(track));
         });
 
