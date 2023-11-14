@@ -320,3 +320,11 @@ button {
         opacity: 0;
     }
 }
+
+th {
+    white-space: nowrap;
+}
+td {
+    white-space: nowrap;
+    overflow: hidden;
+}
