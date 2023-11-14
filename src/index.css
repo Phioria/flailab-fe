@@ -326,5 +326,6 @@ th {
 }
 td {
     white-space: nowrap;
-    overflow: hidden;
+    overflow: auto;
+    max-width: 500px;
 }
