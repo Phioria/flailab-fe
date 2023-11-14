@@ -690,34 +690,90 @@ const AllTracks = () => {
                                                     </label>
                                                 </div>
                                             </td>
-                                            <td>{i + 1}</td>
-                                            <td>{track.dataset}</td>
-                                            <td>{track.species}</td>
-                                            <td>{track.track_name}</td>
-                                            <td>{track.sequencing_type}</td>
-                                            <td>{track.file_location}</td>
-                                            <td>{track.notes}</td>
-                                            <td>{track.mutant}</td>
-                                            <td>{track.tissue}</td>
-                                            <td>{track.cell_line}</td>
-                                            <td>{track.development_stage}</td>
-                                            <td>{track.sex}</td>
-                                            <td>{track.paper}</td>
-                                            <td>{track.srr_id}</td>
-                                            <td>{track.total_mapped}</td>
-                                            <td>{track.percent_aligned}</td>
-                                            <td>{track.percent_uniquely_mapped}</td>
-                                            <td>{track.submitted_by}</td>
-                                            <td>{track.author}</td>
-                                            <td>{track.project}</td>
-                                            <td>{track.file_type}</td>
-                                            <td>{track.file_name}</td>
-                                            <td>{track.paired_single_ended}</td>
-                                            <td>{track.unmapped_reads}</td>
-                                            <td>{track.splice_reads}</td>
-                                            <td>{track.non_splice_reads}</td>
-                                            <td>{track.reads_mapped_to_plus}</td>
-                                            <td>{track.reads_mapped_to_minus}</td>
+                                            <td>
+                                                <div className="td-content">{i + 1}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.dataset}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.species}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.track_name}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.sequencing_type}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.file_location}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.notes}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.mutant}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.tissue}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.cell_line}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.development_stage}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.sex}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.paper}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.srr_id}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.total_mapped}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.percent_aligned}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.percent_uniquely_mapped}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.submitted_by}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.author}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.project}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.file_type}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.file_name}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.paired_single_ended}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.unmapped_reads}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.splice_reads}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.non_splice_reads}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.reads_mapped_to_plus}</div>
+                                            </td>
+                                            <td>
+                                                <div className="td-content">{track.reads_mapped_to_minus}</div>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
