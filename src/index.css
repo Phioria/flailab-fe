@@ -321,6 +321,9 @@ button {
     }
 }
 
+table {
+    font-size: 16px;
+}
 th {
     white-space: nowrap;
 }
