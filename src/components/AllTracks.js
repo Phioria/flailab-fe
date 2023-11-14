@@ -539,7 +539,13 @@ const AllTracks = () => {
             return;
         }
 
-        const csvTracks = tracks.filter((track) => selectedTracks.includes(track.rid));
+        const rawCsvTracks = tracks.filter((track) => selectedTracks.includes(track.rid));
+
+        const csvTracks = rawCsvTracks.map((track) => {
+            delete track.rid;
+            delete track.submitted_by;
+            return track;
+        });
 
         let csvArray = [];
 
@@ -558,7 +564,15 @@ const AllTracks = () => {
             csvContent += row.join(',') + '\n';
         });
 
-        console.log(csvContent);
+        //console.log(csvContent);
+
+        const csvFile = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' });
+
+        const element = document.createElement('a');
+        element.href = URL.createObjectURL(csvFile);
+        element.download = 'flailab-tracks-' + Date.now() + '.csv';
+        document.body.appendChild(element);
+        element.click();
     };
 
     const handleMsgReset = () => {
