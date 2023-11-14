@@ -330,7 +330,7 @@ th {
 td {
 }
 .td-content {
-    max-width: 500px;
+    max-width: 350px;
     overflow: auto;
     white-space: nowrap;
 }
