@@ -542,9 +542,11 @@ const AllTracks = () => {
         let csvArray = [];
 
         const csv_headers = Object.keys(selectedTracks[0]);
+        console.log(`csv_headers: ${csv_headers}`);
         csvArray.push(csv_headers);
 
         selectedTracks.map((track) => {
+            console.log(track);
             csvArray.push(Object.values(track));
         });
 
