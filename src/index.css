@@ -193,7 +193,7 @@ button {
     background: #064785;
     color: white;
     padding-bottom: 80px;
-    height: 40vh;
+    height: 500px;
     margin: 0;
 }
 .jumbotron .btn-primary {
@@ -245,13 +245,23 @@ button {
     max-width: 40px;
 }
 
-.callout {
+.callout-green {
     padding: 1.25rem;
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
     color: rgb(110, 223, 246);
     background-color: rgb(3, 40, 48);
     border-left: 1rem solid rgb(8, 121, 144);
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    color: white;
+    background-color: #064785;
+    border-left: 143m solid #4e9be2;
     border-radius: 0.5rem 0 0 0.5rem;
 }
 
