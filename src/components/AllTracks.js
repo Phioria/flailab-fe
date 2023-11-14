@@ -534,6 +534,29 @@ const AllTracks = () => {
         handleMsgReset();
     };
 
+    const handleDownloadTracks = () => {
+        if (!selectedTracks.length) {
+            return;
+        }
+
+        let csvArray = [];
+
+        const csv_headers = Object.keys(selectedTracks[0]);
+        csvArray.push(csv_headers);
+
+        selectedTracks.map((track) => {
+            csvArray.push(Object.values(track));
+        });
+
+        let csvContent = '';
+
+        csvArray.map((row) => {
+            csvContent += row.join(',') + '\n';
+        });
+
+        console.log(csvContent);
+    };
+
     const handleMsgReset = () => {
         setTimeout(() => {
             setErrMsg('');
@@ -797,6 +820,14 @@ const AllTracks = () => {
                                     onClick={handleEditTracks}
                                 >
                                     Edit
+                                </button>
+                                <button
+                                    className={
+                                        width < 576 ? 'btn btn-primary mt-0 mb-2 me-3' : 'btn btn-primary my-3 me-3'
+                                    }
+                                    onClick={handleDownloadTracks}
+                                >
+                                    Download
                                 </button>
                                 <button
                                     className={width < 576 ? 'btn btn-danger mt-0 mb-2' : 'btn btn-danger my-3'}
