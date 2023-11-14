@@ -261,18 +261,18 @@ button {
     margin-bottom: 1.25rem;
     color: white;
     background-color: #064785;
-    border-left: 143m solid #4e9be2;
+    border-left: 1rem solid #032749;
     border-radius: 0.5rem 0 0 0.5rem;
 }
 
-.callout button {
+/* .callout button {
     background-color: rgb(8, 121, 144);
     color: #fff;
     border-color: #043238;
 }
 .callout button:hover {
     background-color: rgb(36, 155, 179);
-}
+} */
 
 .callout-info {
 }
