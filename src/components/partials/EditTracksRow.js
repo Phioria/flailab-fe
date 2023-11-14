@@ -236,6 +236,86 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
                     onChange={(e) => setRow({ ...row, project: e.target.value })}
                 />
             </td>
+            <td>
+                <input
+                    id={`${id}-file_type`}
+                    form="edit-form"
+                    type="text"
+                    autoComplete="off"
+                    value={row.file_type}
+                    onChange={(e) => setRow({ ...row, file_type: e.target.value })}
+                />
+            </td>
+            <td>
+                <input
+                    id={`${id}-file_name`}
+                    form="edit-form"
+                    type="text"
+                    autoComplete="off"
+                    value={row.file_name}
+                    onChange={(e) => setRow({ ...row, file_name: e.target.value })}
+                />
+            </td>
+            <td>
+                <input
+                    id={`${id}-paired_single_ended`}
+                    form="edit-form"
+                    type="text"
+                    autoComplete="off"
+                    value={row.paired_single_ended}
+                    onChange={(e) => setRow({ ...row, paired_single_ended: e.target.value })}
+                />
+            </td>
+            <td>
+                <input
+                    id={`${id}-unmapped_reads`}
+                    form="edit-form"
+                    type="text"
+                    autoComplete="off"
+                    value={row.unmapped_reads}
+                    onChange={(e) => setRow({ ...row, unmapped_reads: e.target.value })}
+                />
+            </td>
+            <td>
+                <input
+                    id={`${id}-splice_reads`}
+                    form="edit-form"
+                    type="text"
+                    autoComplete="off"
+                    value={row.splice_reads}
+                    onChange={(e) => setRow({ ...row, splice_reads: e.target.value })}
+                />
+            </td>
+            <td>
+                <input
+                    id={`${id}-non_splice_reads`}
+                    form="edit-form"
+                    type="text"
+                    autoComplete="off"
+                    value={row.non_splice_reads}
+                    onChange={(e) => setRow({ ...row, non_splice_reads: e.target.value })}
+                />
+            </td>
+            <td>
+                <input
+                    id={`${id}-reads_mapped_to_plus`}
+                    form="edit-form"
+                    type="text"
+                    autoComplete="off"
+                    value={row.reads_mapped_to_plus}
+                    onChange={(e) => setRow({ ...row, reads_mapped_to_plus: e.target.value })}
+                />
+            </td>
+            <td>
+                <input
+                    id={`${id}-reads_mapped_to_minus`}
+                    form="edit-form"
+                    type="text"
+                    autoComplete="off"
+                    value={row.reads_mapped_to_minus}
+                    onChange={(e) => setRow({ ...row, reads_mapped_to_minus: e.target.value })}
+                />
+            </td>
         </tr>
     );
 };

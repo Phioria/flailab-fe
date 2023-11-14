@@ -74,6 +74,14 @@ const AllTracks = () => {
         submitted_by: 'Submitted By',
         author: 'Author',
         project: 'Project',
+        file_type: 'File Type',
+        file_name: 'File Name',
+        paired_single_ended: 'Paired/Single Ended',
+        unmapped_reads: 'Unmapped Reads',
+        splice_reads: 'Splice Reads',
+        non_splice_reads: 'Non-Splice Reads',
+        reads_mapped_to_plus: 'Reads Mapped to +',
+        reads_mapped_to_minus: 'Reads Mapped to -',
     };
 
     useEffect(() => {
@@ -654,6 +662,14 @@ const AllTracks = () => {
                                         <th>Submitted By</th>
                                         <th>Author</th>
                                         <th>Project</th>
+                                        <th>File Type</th>
+                                        <th>File Name</th>
+                                        <th>Paired/Single Ended</th>
+                                        <th>Unmapped Reads</th>
+                                        <th>Splice Reads</th>
+                                        <th>Non-Splice Reads</th>
+                                        <th>Reads Mapped to +</th>
+                                        <th>Reads Mapped to -</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -694,6 +710,14 @@ const AllTracks = () => {
                                             <td>{track.submitted_by}</td>
                                             <td>{track.author}</td>
                                             <td>{track.project}</td>
+                                            <td>{track.file_type}</td>
+                                            <td>{track.file_name}</td>
+                                            <td>{track.paired_single_ended}</td>
+                                            <td>{track.unmapped_reads}</td>
+                                            <td>{track.splice_reads}</td>
+                                            <td>{track.non_splice_reads}</td>
+                                            <td>{track.reads_mapped_to_plus}</td>
+                                            <td>{track.reads_mapped_to_minus}</td>
                                         </tr>
                                     ))}
                                 </tbody>

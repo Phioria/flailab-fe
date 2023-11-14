@@ -48,6 +48,14 @@ const EditTracks = ({
         'submitted_by',
         'author',
         'project',
+        'file_type',
+        'paired_single_ended',
+        'file_name',
+        'unmapped_reads',
+        'reads_mapped_to_plus',
+        'reads_mapped_to_minus',
+        'splice_reads',
+        'non_splice_reads',
     ];
 
     // Once component loads, filter the 'tracks' array for rids that match the ids in selectedTracks
@@ -238,6 +246,14 @@ const EditTracks = ({
                             <th>Submitted By</th>
                             <th>Author</th>
                             <th>Project</th>
+                            <th>File Type</th>
+                            <th>File Name</th>
+                            <th>Paired/Single Ended</th>
+                            <th>Unmapped Reads</th>
+                            <th>Splice Reads</th>
+                            <th>Non-Splice Reads</th>
+                            <th>Reads Mapped to +</th>
+                            <th>Reads Mapped to -</th>
                         </tr>
                     </thead>
                     <tbody>
