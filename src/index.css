@@ -97,6 +97,10 @@ textarea {
     border-radius: 0.5rem;
 }
 
+.small-input {
+    font-size: 16 !important;
+}
+
 label,
 button {
     margin-top: 1rem;

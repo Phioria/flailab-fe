@@ -44,6 +44,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-dataset`}
                         form="edit-form"
                         type="text"
@@ -57,6 +58,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-species`}
                         form="edit-form"
                         type="text"
@@ -70,6 +72,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-track_name`}
                         form="edit-form"
                         type="text"
@@ -82,6 +85,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-sequencing_type`}
                         form="edit-form"
                         type="text"
@@ -95,6 +99,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-file_location`}
                         form="edit-form"
                         type="text"
@@ -108,6 +113,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-notes`}
                         form="edit-form"
                         type="text"
@@ -120,6 +126,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-mutant`}
                         form="edit-form"
                         type="text"
@@ -132,6 +139,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-tissue`}
                         form="edit-form"
                         type="text"
@@ -145,6 +153,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-cell_line`}
                         form="edit-form"
                         type="text"
@@ -157,6 +166,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-development_stage`}
                         form="edit-form"
                         type="text"
@@ -169,6 +179,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-sex`}
                         form="edit-form"
                         type="text"
@@ -181,6 +192,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-paper`}
                         form="edit-form"
                         type="text"
@@ -193,6 +205,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-srr_id`}
                         form="edit-form"
                         type="text"
@@ -205,6 +218,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-total_mapped`}
                         form="edit-form"
                         type="text"
@@ -217,6 +231,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-percent_aligned`}
                         form="edit-form"
                         type="text"
@@ -229,6 +244,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-percent_uniquely_mapped`}
                         form="edit-form"
                         type="text"
@@ -241,6 +257,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-submitted_by`}
                         form="edit-form"
                         type="email"
@@ -253,6 +270,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-author`}
                         form="edit-form"
                         type="text"
@@ -265,6 +283,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-project`}
                         form="edit-form"
                         type="text"
@@ -277,6 +296,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-file_type`}
                         form="edit-form"
                         type="text"
@@ -289,6 +309,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-file_name`}
                         form="edit-form"
                         type="text"
@@ -301,6 +322,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-paired_single_ended`}
                         form="edit-form"
                         type="text"
@@ -313,6 +335,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-unmapped_reads`}
                         form="edit-form"
                         type="text"
@@ -325,6 +348,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-splice_reads`}
                         form="edit-form"
                         type="text"
@@ -337,6 +361,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-non_splice_reads`}
                         form="edit-form"
                         type="text"
@@ -349,6 +374,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-reads_mapped_to_plus`}
                         form="edit-form"
                         type="text"
@@ -361,6 +387,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
             <td>
                 <div className="td-content">
                     <input
+                        className="small-input"
                         id={`${id}-reads_mapped_to_minus`}
                         form="edit-form"
                         type="text"
