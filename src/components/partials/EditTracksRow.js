@@ -42,279 +42,333 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
     return (
         <tr>
             <td>
-                <input
-                    id={`${id}-dataset`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.dataset}
-                    onChange={(e) => setRow({ ...row, dataset: e.target.value })}
-                    required
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-dataset`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.dataset}
+                        onChange={(e) => setRow({ ...row, dataset: e.target.value })}
+                        required
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-species`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.species}
-                    onChange={(e) => setRow({ ...row, species: e.target.value })}
-                    required
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-species`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.species}
+                        onChange={(e) => setRow({ ...row, species: e.target.value })}
+                        required
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-track_name`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.track_name}
-                    onChange={(e) => setRow({ ...row, track_name: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-track_name`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.track_name}
+                        onChange={(e) => setRow({ ...row, track_name: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-sequencing_type`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.sequencing_type}
-                    onChange={(e) => setRow({ ...row, sequencing_type: e.target.value })}
-                    required
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-sequencing_type`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.sequencing_type}
+                        onChange={(e) => setRow({ ...row, sequencing_type: e.target.value })}
+                        required
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-file_location`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.file_location}
-                    onChange={(e) => setRow({ ...row, file_location: e.target.value })}
-                    required
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-file_location`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.file_location}
+                        onChange={(e) => setRow({ ...row, file_location: e.target.value })}
+                        required
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-notes`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.notes}
-                    onChange={(e) => setRow({ ...row, notes: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-notes`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.notes}
+                        onChange={(e) => setRow({ ...row, notes: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-mutant`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.mutant}
-                    onChange={(e) => setRow({ ...row, mutant: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-mutant`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.mutant}
+                        onChange={(e) => setRow({ ...row, mutant: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-tissue`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.tissue}
-                    onChange={(e) => setRow({ ...row, tissue: e.target.value })}
-                    required
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-tissue`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.tissue}
+                        onChange={(e) => setRow({ ...row, tissue: e.target.value })}
+                        required
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-cell_line`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.cell_line}
-                    onChange={(e) => setRow({ ...row, cell_line: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-cell_line`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.cell_line}
+                        onChange={(e) => setRow({ ...row, cell_line: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-development_stage`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.development_stage}
-                    onChange={(e) => setRow({ ...row, development_stage: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-development_stage`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.development_stage}
+                        onChange={(e) => setRow({ ...row, development_stage: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-sex`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.sex}
-                    onChange={(e) => setRow({ ...row, sex: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-sex`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.sex}
+                        onChange={(e) => setRow({ ...row, sex: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-paper`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.paper}
-                    onChange={(e) => setRow({ ...row, paper: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-paper`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.paper}
+                        onChange={(e) => setRow({ ...row, paper: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-srr_id`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.srr_id}
-                    onChange={(e) => setRow({ ...row, srr_id: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-srr_id`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.srr_id}
+                        onChange={(e) => setRow({ ...row, srr_id: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-total_mapped`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.total_mapped}
-                    onChange={(e) => setRow({ ...row, total_mapped: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-total_mapped`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.total_mapped}
+                        onChange={(e) => setRow({ ...row, total_mapped: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-percent_aligned`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.percent_aligned}
-                    onChange={(e) => setRow({ ...row, percent_aligned: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-percent_aligned`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.percent_aligned}
+                        onChange={(e) => setRow({ ...row, percent_aligned: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-percent_uniquely_mapped`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.percent_uniquely_mapped}
-                    onChange={(e) => setRow({ ...row, percent_uniquely_mapped: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-percent_uniquely_mapped`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.percent_uniquely_mapped}
+                        onChange={(e) => setRow({ ...row, percent_uniquely_mapped: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-submitted_by`}
-                    form="edit-form"
-                    type="email"
-                    autoComplete="off"
-                    value={row.submitted_by}
-                    onChange={(e) => setRow({ ...row, submitted_by: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-submitted_by`}
+                        form="edit-form"
+                        type="email"
+                        autoComplete="off"
+                        value={row.submitted_by}
+                        onChange={(e) => setRow({ ...row, submitted_by: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-author`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.author}
-                    onChange={(e) => setRow({ ...row, author: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-author`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.author}
+                        onChange={(e) => setRow({ ...row, author: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-project`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.project}
-                    onChange={(e) => setRow({ ...row, project: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-project`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.project}
+                        onChange={(e) => setRow({ ...row, project: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-file_type`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.file_type}
-                    onChange={(e) => setRow({ ...row, file_type: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-file_type`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.file_type}
+                        onChange={(e) => setRow({ ...row, file_type: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-file_name`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.file_name}
-                    onChange={(e) => setRow({ ...row, file_name: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-file_name`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.file_name}
+                        onChange={(e) => setRow({ ...row, file_name: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-paired_single_ended`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.paired_single_ended}
-                    onChange={(e) => setRow({ ...row, paired_single_ended: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-paired_single_ended`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.paired_single_ended}
+                        onChange={(e) => setRow({ ...row, paired_single_ended: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-unmapped_reads`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.unmapped_reads}
-                    onChange={(e) => setRow({ ...row, unmapped_reads: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-unmapped_reads`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.unmapped_reads}
+                        onChange={(e) => setRow({ ...row, unmapped_reads: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-splice_reads`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.splice_reads}
-                    onChange={(e) => setRow({ ...row, splice_reads: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-splice_reads`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.splice_reads}
+                        onChange={(e) => setRow({ ...row, splice_reads: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-non_splice_reads`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.non_splice_reads}
-                    onChange={(e) => setRow({ ...row, non_splice_reads: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-non_splice_reads`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.non_splice_reads}
+                        onChange={(e) => setRow({ ...row, non_splice_reads: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-reads_mapped_to_plus`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.reads_mapped_to_plus}
-                    onChange={(e) => setRow({ ...row, reads_mapped_to_plus: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-reads_mapped_to_plus`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.reads_mapped_to_plus}
+                        onChange={(e) => setRow({ ...row, reads_mapped_to_plus: e.target.value })}
+                    />
+                </div>
             </td>
             <td>
-                <input
-                    id={`${id}-reads_mapped_to_minus`}
-                    form="edit-form"
-                    type="text"
-                    autoComplete="off"
-                    value={row.reads_mapped_to_minus}
-                    onChange={(e) => setRow({ ...row, reads_mapped_to_minus: e.target.value })}
-                />
+                <div className="td-content">
+                    <input
+                        id={`${id}-reads_mapped_to_minus`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.reads_mapped_to_minus}
+                        onChange={(e) => setRow({ ...row, reads_mapped_to_minus: e.target.value })}
+                    />
+                </div>
             </td>
         </tr>
     );

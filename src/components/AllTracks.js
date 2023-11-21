@@ -550,11 +550,9 @@ const AllTracks = () => {
         let csvArray = [];
 
         const csv_headers = Object.keys(csvTracks[0]);
-        //console.log(`csv_headers: ${csv_headers}`);
         csvArray.push(csv_headers);
 
         csvTracks.map((track) => {
-            //console.log(track);
             csvArray.push(Object.values(track));
         });
 
@@ -563,8 +561,6 @@ const AllTracks = () => {
         csvArray.map((row) => {
             csvContent += row.join(',') + '\n';
         });
-
-        //console.log(csvContent);
 
         const csvFile = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' });
 
