@@ -87,9 +87,14 @@ const AllTracks = () => {
     useEffect(() => {
         let isMounted = true;
 
+        // todo update to dynamic
+        // setting these manually for now. will change for pagenation after testing
+        const limit = 500;
+        const offset = 0;
+
         const getTracks = async () => {
             try {
-                const response = await axiosPrivate.get(RECORDS_URL, {
+                const response = await axiosPrivate.get(`${RECORDS_URL}/${limit}/${offset}`, {
                     signal: newAbortSignal(5000), // Abort after 5 seconds
                 });
 
