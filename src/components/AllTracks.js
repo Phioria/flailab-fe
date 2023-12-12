@@ -21,6 +21,7 @@ const AllTracks = () => {
     const { width } = useWindowSize();
     const errRef = useRef();
     const successRef = useRef();
+    const [isLoading, setIsLoading] = useState(true);
 
     const [tracks, setTracks] = useState([]);
 
@@ -112,6 +113,7 @@ const AllTracks = () => {
 
         return () => {
             isMounted = false;
+            setIsLoading(false);
             newAbortSignal(); // Abort immediately
         };
     }, [axiosPrivate, location, navigate]);
@@ -648,7 +650,14 @@ const AllTracks = () => {
                                 {renderSearchRows()}
                             </form>
                         </Container>
-                        {searchResults.length ? (
+                        {isLoading ? (
+                            <div
+                                className="d-flex justify-content-center"
+                                aria-label="Spinning DNA molecule representing that tracks are loading"
+                            >
+                                <img src="dna.svg" alt="DNA molecule" />
+                            </div>
+                        ) : searchResults.length ? (
                             <Table
                                 striped
                                 bordered
@@ -674,18 +683,18 @@ const AllTracks = () => {
                                         <th>
                                             Dataset
                                             {/* {sortIcon === 'down' ? (
-                                                <SortUp className="ms-3" onClick={() => setColumn({ dataset: 'up' })} />
-                                            ) : (
-                                                <SortDown className="ms-3" onClick={() => setColumn({ dataset: 'down' })} />
-                                            )} */}
+                                                    <SortUp className="ms-3" onClick={() => setColumn({ dataset: 'up' })} />
+                                                ) : (
+                                                    <SortDown className="ms-3" onClick={() => setColumn({ dataset: 'down' })} />
+                                                )} */}
                                         </th>
                                         <th>
                                             Species
                                             {/* {sortIcon === 'down' ? (
-                                                <SortUp className="ms-3" onClick={() => setColumn({ species: 'up' })} />
-                                            ) : (
-                                                <SortDown className="ms-3" onClick={() => setColumn({ species: 'down' })} />
-                                            )} */}
+                                                    <SortUp className="ms-3" onClick={() => setColumn({ species: 'up' })} />
+                                                ) : (
+                                                    <SortDown className="ms-3" onClick={() => setColumn({ species: 'down' })} />
+                                                )} */}
                                         </th>
                                         <th>Track Name</th>
                                         <th>Sequencing Type</th>
