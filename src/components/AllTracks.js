@@ -106,6 +106,8 @@ const AllTracks = () => {
                     state: { from: location },
                     replace: true,
                 });
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -113,7 +115,6 @@ const AllTracks = () => {
 
         return () => {
             isMounted = false;
-            setIsLoading(false);
             newAbortSignal(); // Abort immediately
         };
     }, [axiosPrivate, location, navigate]);
