@@ -99,7 +99,8 @@ const AllTracks = () => {
                     signal: newAbortSignal(5000), // Abort after 5 seconds
                 });
 
-                isMounted && setTracks(response.data);
+                console.log(`Total Rows: ${response.data.count}`);
+                isMounted && setTracks(response.data.rows);
             } catch (err) {
                 console.error(err);
                 navigate('/login', {
