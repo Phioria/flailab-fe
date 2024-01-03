@@ -95,7 +95,11 @@ const AllTracks = () => {
         // todo update to dynamic
         // setting these manually for now. will change for pagenation after testing
         const limit = 500;
-        const offset = pageNumber == null ? 0 : (pageNumber - 1) * 500;
+        if (pageNumber == null) {
+            pageNumber = 1;
+        }
+        //const offset = pageNumber == null ? 0 : (pageNumber - 1) * 500;
+        const offset = (pageNumber - 1) * 500;
 
         const getTracks = async () => {
             try {
@@ -675,7 +679,14 @@ const AllTracks = () => {
                                 <div className="d-inline-block mb-2 ms-3">
                                     <p className="mb-1">{`${numberOfRecords} Records`}</p>
                                     {pages.map((page) => (
-                                        <Link to={`/records/${page}`} className="link-dark me-2">
+                                        <Link
+                                            to={`/records/${page}`}
+                                            className={
+                                                page === pageNumber
+                                                    ? 'link-dark me-2 text-decoration-none'
+                                                    : 'link-dark me-2'
+                                            }
+                                        >
                                             {page}
                                         </Link>
                                     ))}
