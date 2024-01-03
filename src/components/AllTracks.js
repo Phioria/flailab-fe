@@ -777,7 +777,9 @@ const AllTracks = () => {
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div className="td-content">{i + 1}</div>
+                                                    <div className="td-content">
+                                                        {pageNumber == null ? i + 1 : i + 1 + (pageNumber - 1) * 500}
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <div className="td-content">{track.dataset}</div>
