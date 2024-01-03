@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Header from './Header';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import { newAbortSignal } from '../api/axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import { Container, Button } from 'react-bootstrap';
 //import Button from 'react-bootstrap';
@@ -24,6 +24,7 @@ const AllTracks = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const [tracks, setTracks] = useState([]);
+    const [pages, setPages] = useState([]);
 
     // State for Searching
     // Mapping through an unknown number of search fields in an array proved to be problematic
@@ -100,6 +101,11 @@ const AllTracks = () => {
                 });
 
                 console.log(`Total Rows: ${response.data.count}`);
+                const numberOfPages = Math.ceil(response.data.count / limit);
+                // Creates an array of sequential integers from 1 to the number of pages
+                // This will be used to generate the pagenation links on the page
+                const pagesArray = Array.from({ length: numberOfPages }, (v, i) => i + 1);
+                isMounted && setPages(pagesArray);
                 isMounted && setTracks(response.data.rows);
             } catch (err) {
                 console.error(err);
@@ -660,177 +666,187 @@ const AllTracks = () => {
                                 <img src="dna.svg" alt="DNA molecule" />
                             </div>
                         ) : searchResults.length ? (
-                            <Table
-                                striped
-                                bordered
-                                hover
-                                className={selectedTracks.length ? 'table-footer-spacing' : 'mb-0'}
-                            >
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <div>
-                                                <input
-                                                    className="form-check-input"
-                                                    type="checkbox"
-                                                    value=""
-                                                    id="select-all"
-                                                />
-                                                <label className="form-check-label offscreen" htmlFor="select-all">
-                                                    Select All
-                                                </label>
-                                            </div>
-                                        </th>
-                                        <th>#</th>
-                                        <th>
-                                            Dataset
-                                            {/* {sortIcon === 'down' ? (
+                            <>
+                                <div className="d-inline-block">
+                                    {pages.map((page) => (
+                                        <Link to={`/records/${page}`}>{page}</Link>
+                                    ))}
+                                </div>
+                                <Table
+                                    striped
+                                    bordered
+                                    hover
+                                    className={selectedTracks.length ? 'table-footer-spacing' : 'mb-0'}
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <div>
+                                                    <input
+                                                        className="form-check-input"
+                                                        type="checkbox"
+                                                        value=""
+                                                        id="select-all"
+                                                    />
+                                                    <label className="form-check-label offscreen" htmlFor="select-all">
+                                                        Select All
+                                                    </label>
+                                                </div>
+                                            </th>
+                                            <th>#</th>
+                                            <th>
+                                                Dataset
+                                                {/* {sortIcon === 'down' ? (
                                                     <SortUp className="ms-3" onClick={() => setColumn({ dataset: 'up' })} />
                                                 ) : (
                                                     <SortDown className="ms-3" onClick={() => setColumn({ dataset: 'down' })} />
                                                 )} */}
-                                        </th>
-                                        <th>
-                                            Species
-                                            {/* {sortIcon === 'down' ? (
+                                            </th>
+                                            <th>
+                                                Species
+                                                {/* {sortIcon === 'down' ? (
                                                     <SortUp className="ms-3" onClick={() => setColumn({ species: 'up' })} />
                                                 ) : (
                                                     <SortDown className="ms-3" onClick={() => setColumn({ species: 'down' })} />
                                                 )} */}
-                                        </th>
-                                        <th>Track Name</th>
-                                        <th>Sequencing Type</th>
-                                        <th>File Location</th>
-                                        <th>Notes</th>
-                                        <th>Mutant</th>
-                                        <th>Tissue</th>
-                                        <th>Cell Line</th>
-                                        <th>Development Stage</th>
-                                        <th>Sex</th>
-                                        <th>Paper</th>
-                                        <th>SRR ID</th>
-                                        <th>Total Mapped</th>
-                                        <th>Percent Aligned</th>
-                                        <th>Percent Uniquely Mapped</th>
-                                        <th>Submitted By</th>
-                                        <th>Author</th>
-                                        <th>Project</th>
-                                        <th>File Type</th>
-                                        <th>File Name</th>
-                                        <th>Paired/Single Ended</th>
-                                        <th>Unmapped Reads</th>
-                                        <th>Splice Reads</th>
-                                        <th>Non-Splice Reads</th>
-                                        <th>Reads Mapped to +</th>
-                                        <th>Reads Mapped to -</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {searchResults.map((track, i) => (
-                                        <tr key={track.rid}>
-                                            <td>
-                                                <div>
-                                                    <input
-                                                        className="form-check-input select-box"
-                                                        type="checkbox"
-                                                        value=""
-                                                        id={track.rid}
-                                                        name={i}
-                                                        onChange={handleSingleSelectedTrack}
-                                                    />
-                                                    <label className="form-check-label offscreen" htmlFor={track.rid}>
-                                                        Select All
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{i + 1}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.dataset}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.species}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.track_name}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.sequencing_type}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.file_location}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.notes}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.mutant}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.tissue}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.cell_line}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.development_stage}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.sex}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.paper}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.srr_id}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.total_mapped}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.percent_aligned}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.percent_uniquely_mapped}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.submitted_by}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.author}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.project}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.file_type}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.file_name}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.paired_single_ended}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.unmapped_reads}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.splice_reads}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.non_splice_reads}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.reads_mapped_to_plus}</div>
-                                            </td>
-                                            <td>
-                                                <div className="td-content">{track.reads_mapped_to_minus}</div>
-                                            </td>
+                                            </th>
+                                            <th>Track Name</th>
+                                            <th>Sequencing Type</th>
+                                            <th>File Location</th>
+                                            <th>Notes</th>
+                                            <th>Mutant</th>
+                                            <th>Tissue</th>
+                                            <th>Cell Line</th>
+                                            <th>Development Stage</th>
+                                            <th>Sex</th>
+                                            <th>Paper</th>
+                                            <th>SRR ID</th>
+                                            <th>Total Mapped</th>
+                                            <th>Percent Aligned</th>
+                                            <th>Percent Uniquely Mapped</th>
+                                            <th>Submitted By</th>
+                                            <th>Author</th>
+                                            <th>Project</th>
+                                            <th>File Type</th>
+                                            <th>File Name</th>
+                                            <th>Paired/Single Ended</th>
+                                            <th>Unmapped Reads</th>
+                                            <th>Splice Reads</th>
+                                            <th>Non-Splice Reads</th>
+                                            <th>Reads Mapped to +</th>
+                                            <th>Reads Mapped to -</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
+                                    </thead>
+                                    <tbody>
+                                        {searchResults.map((track, i) => (
+                                            <tr key={track.rid}>
+                                                <td>
+                                                    <div>
+                                                        <input
+                                                            className="form-check-input select-box"
+                                                            type="checkbox"
+                                                            value=""
+                                                            id={track.rid}
+                                                            name={i}
+                                                            onChange={handleSingleSelectedTrack}
+                                                        />
+                                                        <label
+                                                            className="form-check-label offscreen"
+                                                            htmlFor={track.rid}
+                                                        >
+                                                            Select All
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{i + 1}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.dataset}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.species}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.track_name}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.sequencing_type}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.file_location}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.notes}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.mutant}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.tissue}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.cell_line}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.development_stage}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.sex}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.paper}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.srr_id}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.total_mapped}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.percent_aligned}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.percent_uniquely_mapped}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.submitted_by}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.author}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.project}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.file_type}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.file_name}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.paired_single_ended}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.unmapped_reads}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.splice_reads}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.non_splice_reads}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.reads_mapped_to_plus}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.reads_mapped_to_minus}</div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </>
                         ) : (
                             <p style={{ marginTop: '2rem' }}>No tracks to display.</p>
                         )}
