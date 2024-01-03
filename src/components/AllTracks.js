@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Header from './Header';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import { newAbortSignal } from '../api/axios';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation, useParams, Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import { Container, Button } from 'react-bootstrap';
 //import Button from 'react-bootstrap';
@@ -15,6 +15,8 @@ import EditTracks from './partials/EditTracks';
 const RECORDS_URL = '/records';
 
 const AllTracks = () => {
+    const { pageNumber } = useParams();
+
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
@@ -93,7 +95,7 @@ const AllTracks = () => {
         // todo update to dynamic
         // setting these manually for now. will change for pagenation after testing
         const limit = 500;
-        const offset = 0;
+        const offset = pageNumber == null ? 0 : (pageNumber - 1) * 500;
 
         const getTracks = async () => {
             try {
