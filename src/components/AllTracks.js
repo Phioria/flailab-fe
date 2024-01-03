@@ -679,9 +679,9 @@ const AllTracks = () => {
                                         <Link
                                             to={`/records/${page}`}
                                             className={
-                                                pageNumber == null && page === 1
+                                                pageNumber == null && page == 1
                                                     ? 'link-dark me-3 text-decoration-none'
-                                                    : page === pageNumber
+                                                    : page == pageNumber
                                                     ? 'link-dark me-3 text-decoration-none'
                                                     : 'link-dark me-3'
                                             }
