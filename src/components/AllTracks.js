@@ -25,6 +25,7 @@ const AllTracks = () => {
 
     const [tracks, setTracks] = useState([]);
     const [pages, setPages] = useState([]);
+    const [numberOfRecords, setNumberOfRecords] = useState();
 
     // State for Searching
     // Mapping through an unknown number of search fields in an array proved to be problematic
@@ -101,6 +102,8 @@ const AllTracks = () => {
                 });
 
                 console.log(`Total Rows: ${response.data.count}`);
+                // TODO: If there is a problem with fetching, perhaps set this differently
+                setNumberOfRecords(response.data.count);
                 const numberOfPages = Math.ceil(response.data.count / limit);
                 // Creates an array of sequential integers from 1 to the number of pages
                 // This will be used to generate the pagenation links on the page
@@ -667,7 +670,8 @@ const AllTracks = () => {
                             </div>
                         ) : searchResults.length ? (
                             <>
-                                <div className="d-inline-block mb-2">
+                                <div className="d-inline-block mb-2 ms-3">
+                                    <p className="mb-1">{`${numberOfRecords} Records`}</p>
                                     {pages.map((page) => (
                                         <Link to={`/records/${page}`} className="link-dark me-2">
                                             {page}
