@@ -667,9 +667,11 @@ const AllTracks = () => {
                             </div>
                         ) : searchResults.length ? (
                             <>
-                                <div className="d-inline-block">
+                                <div className="d-inline-block mb-2">
                                     {pages.map((page) => (
-                                        <Link to={`/records/${page}`}>{page}</Link>
+                                        <Link to={`/records/${page}`} className="link-dark me-2">
+                                            {page}
+                                        </Link>
                                     ))}
                                 </div>
                                 <Table
