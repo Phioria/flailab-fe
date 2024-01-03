@@ -16,7 +16,6 @@ const RECORDS_URL = '/records';
 
 const AllTracks = () => {
     const { pageNumber } = useParams();
-    const [currentPage, setCurrentPage] = useState();
 
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
@@ -96,13 +95,8 @@ const AllTracks = () => {
         // todo update to dynamic
         // setting these manually for now. will change for pagenation after testing
         const limit = 500;
-        if (pageNumber == null) {
-            setCurrentPage(1);
-        } else {
-            setCurrentPage(pageNumber);
-        }
-        //const offset = pageNumber == null ? 0 : (pageNumber - 1) * 500;
-        const offset = (currentPage - 1) * 500;
+
+        const offset = pageNumber == null ? 0 : (pageNumber - 1) * 500;
 
         const getTracks = async () => {
             try {
@@ -685,7 +679,9 @@ const AllTracks = () => {
                                         <Link
                                             to={`/records/${page}`}
                                             className={
-                                                page === currentPage
+                                                pageNumber == null && page === 1
+                                                    ? 'link-dark me-3 text-decoration-none'
+                                                    : page === pageNumber
                                                     ? 'link-dark me-3 text-decoration-none'
                                                     : 'link-dark me-3'
                                             }
