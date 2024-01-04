@@ -126,6 +126,10 @@ const AllTracks = () => {
         //! tracks, track count, number of pages, pages array, links to pagination
         //! the problem comes in when we click on a second page
 
+        if (searching) {
+            console.log('made it here');
+        }
+
         getTracks();
 
         return () => {
@@ -330,7 +334,7 @@ const AllTracks = () => {
     };
 
     const handleSearch = () => {
-        console.log(`currentSearchTerm: ${currentSearchTerm}`);
+        console.log(`currentSearchTerm: ${JSON.stringify(currentSearchTerm)}`);
         console.log(`searchTerms: ${searchTerms}`);
 
         // TODO: We need to add in a way to clear the search terms when we're no longer using them
@@ -392,7 +396,6 @@ const AllTracks = () => {
                                 {successMsg}
                             </p>
                             <form className="searchForm" onSubmit={(e) => e.preventDefault()}>
-                                {/*renderSearchRows()*/}
                                 <SearchRow
                                     FIELDS={FIELDS}
                                     currentSearchTerm={currentSearchTerm}
