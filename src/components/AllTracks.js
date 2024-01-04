@@ -94,7 +94,6 @@ const AllTracks = () => {
                           signal: newAbortSignal(5000), // Abort after 5 seconds
                       });
 
-                console.log(`Total Rows: ${response.data.count}`);
                 // TODO: If there is a problem with fetching, perhaps set this differently
                 setNumberOfRecords(response.data.count);
                 const numberOfPages = Math.ceil(response.data.count / LIMIT);
@@ -330,7 +329,9 @@ const AllTracks = () => {
     };
 
     const handleSearch = () => {
-        console.log(searchTerms);
+        console.log(`currentSearchTerm: ${currentSearchTerm}`);
+        console.log(`searchTerms: ${searchTerms}`);
+
         // TODO: We need to add in a way to clear the search terms when we're no longer using them
         // todo: perhaps add this into the primary useEffect and check to see if we're searching or not
         // todo: also add in badges showing what we're searching for...they should have an x on them to delete the search term
