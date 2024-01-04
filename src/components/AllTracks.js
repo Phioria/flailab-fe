@@ -31,6 +31,7 @@ const AllTracks = () => {
 
     // State for Searching
     // { field: 'field', searchTerm: 'term' }
+    const [currentSearchTerm, setCurrentSearchTerm] = useState({ column: '', value: '' });
     const [searchTerms, setSearchTerms] = useState([]);
 
     // State for Editing, Deleting, Checkboxes
@@ -328,6 +329,19 @@ const AllTracks = () => {
         setShowEdit(true);
     };
 
+    const handleSearch = () => {
+        console.log(searchTerms);
+        // TODO: We need to add in a way to clear the search terms when we're no longer using them
+        // todo: perhaps add this into the primary useEffect and check to see if we're searching or not
+        // todo: also add in badges showing what we're searching for...they should have an x on them to delete the search term
+        setSearchTerms([...searchTerms, currentSearchTerm]);
+        setCurrentSearchTerm({ column: '', value: '' }); // Reset the currentSearchTerm once it's been used
+        navigate('/records/search', {
+            state: { from: location },
+            replace: true,
+        });
+    };
+
     return (
         <div id="ob-wrap">
             <Header />
@@ -380,7 +394,12 @@ const AllTracks = () => {
                             </p>
                             <form className="searchForm" onSubmit={(e) => e.preventDefault()}>
                                 {/*renderSearchRows()*/}
-                                <SearchRow FIELDS={FIELDS} searchTerms={searchTerms} setSearchTerms={setSearchTerms} />
+                                <SearchRow
+                                    FIELDS={FIELDS}
+                                    currentSearchTerm={currentSearchTerm}
+                                    setCurrentSearchTerm={setCurrentSearchTerm}
+                                    handleSearch={handleSearch}
+                                />
                             </form>
                         </Container>
                         {isLoading ? (
