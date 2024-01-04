@@ -5,9 +5,7 @@ import { newAbortSignal } from '../api/axios';
 import { useNavigate, useLocation, useParams, Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import { Container, Button } from 'react-bootstrap';
-//import Button from 'react-bootstrap';
-//import { SortDown, SortUp } from 'react-bootstrap-icons';
-//import { sort } from 'fast-sort';
+
 import SearchRow from './SearchRow';
 import useWindowSize from '../hooks/useWindowSize';
 import Modal from 'react-bootstrap/Modal';
@@ -16,6 +14,8 @@ const RECORDS_URL = '/records';
 
 const AllTracks = () => {
     const { pageNumber } = useParams();
+
+    const LIMIT = 500; // Number of tracks per page...might change later to be changable on site
 
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
@@ -30,22 +30,8 @@ const AllTracks = () => {
     const [numberOfRecords, setNumberOfRecords] = useState();
 
     // State for Searching
-    // Mapping through an unknown number of search fields in an array proved to be problematic
-    // Was getting massive amounts of duplicate results
-    // Switching to 6 maximum search fields so it can be hard coded
     // { field: 'field', searchTerm: 'term' }
-    const [searchRow1, setSearchRow1] = useState({ field: '', searchTerm: '' });
-    const [searchRow2, setSearchRow2] = useState({ field: '', searchTerm: '' });
-    const [searchRow3, setSearchRow3] = useState({ field: '', searchTerm: '' });
-    const [searchRow4, setSearchRow4] = useState({ field: '', searchTerm: '' });
-    const [searchRow5, setSearchRow5] = useState({ field: '', searchTerm: '' });
-    const [searchRow6, setSearchRow6] = useState({ field: '', searchTerm: '' });
-    const [numberOfSearchRows, setNumberOfSearchRows] = useState(1);
-    const [searchResults, setSearchResults] = useState([]);
-
-    // State for Sorting
-    //const [column, setColumn] = useState({});
-    //const [sortIcon, setSortIcon] = useState('down');
+    const [searchParameters, setSearchParameters] = useState([]);
 
     // State for Editing, Deleting, Checkboxes
     const [selectedTracks, setSelectedTracks] = useState([]);
@@ -94,13 +80,11 @@ const AllTracks = () => {
 
         // todo update to dynamic
         // setting these manually for now. will change for pagenation after testing
-        const limit = 500;
-
-        const offset = pageNumber == null ? 0 : (pageNumber - 1) * 500;
+        const offset = pageNumber == null ? 0 : (pageNumber - 1) * LIMIT;
 
         const getTracks = async () => {
             try {
-                const response = await axiosPrivate.get(`${RECORDS_URL}/${limit}/${offset}`, {
+                const response = await axiosPrivate.get(`${RECORDS_URL}/${LIMIT}/${offset}`, {
                     signal: newAbortSignal(5000), // Abort after 5 seconds
                 });
 
@@ -124,6 +108,7 @@ const AllTracks = () => {
             }
         };
 
+        console.log(location.pathname);
         getTracks();
 
         return () => {
@@ -202,16 +187,16 @@ const AllTracks = () => {
         }
     };
 
-    // Runs once searchResults are populated
+    // Runs once tracks are populated
     // Adds event listener to the select all box to handle toggling of checkboxes
     useEffect(() => {
         const checkboxes = Array.from(document.getElementsByClassName('select-box'));
         const selectbox = document.getElementById('select-all');
 
-        // Any time searchResults change, we need to either:
+        // Any time tracks change, we need to either:
         // A: Reset both the checkboxes and the selectedTracks OR
         // B: Map through the selectedTracks, and
-        //    If they don't exist in the new searchResults, then remove them
+        //    If they don't exist in the new tracks, then remove them
         // Probably safest to just reset them all.
         // Looks like the checkboxes reset when they aren't in the current search results
         // Just need to reset the selectedTracks and current checkboxes
@@ -236,289 +221,11 @@ const AllTracks = () => {
         return () => {
             document.removeEventListener('change', handleToggleCheckboxes);
         };
-    }, [searchResults]);
+    }, [tracks]);
 
-    // Adding numberOfSearchRows to the dependencies made it more responsive, but now when you add a new field, it shows no results until you add a field
-    // Gonna need to add some more if statements i think instead of optional chaining
-    useEffect(() => {
-        // We need a case for global search
-        // Perhaps have a toggle for field versus global search
-        // For now just run a field search
-
-        // Helper function to test if the search.field is empty or at the default
-        const searchIsEmpty = (obj) => {
-            return obj.field.length === 0 || obj.field === 'Select a Field to Search';
-        };
-
-        const searchOrTrue = (obj, track) => {
-            if (searchIsEmpty(obj)) {
-                return true;
-            } else {
-                return track[obj.field].toLowerCase().includes(obj.searchTerm.toLowerCase());
-            }
-        };
-
-        if (numberOfSearchRows === 1) {
-            if (searchIsEmpty(searchRow1)) {
-                const filteredResults = tracks.filter((track) => {
-                    const trackContent = Object.values(track).join(' ');
-                    return trackContent.toLowerCase().includes(searchRow1.searchTerm.toLowerCase());
-                });
-                setSearchResults(filteredResults);
-            } else {
-                // 1 Search Row but there is a field present
-                const filteredResults = tracks.filter((track) => {
-                    return track[searchRow1.field].toLowerCase().includes(searchRow1.searchTerm.toLowerCase());
-                });
-                setSearchResults(filteredResults);
-            }
-        } else {
-            // For any number of rows over 1
-            const filteredResults = tracks.filter((track) => {
-                return (
-                    searchOrTrue(searchRow1, track) &&
-                    searchOrTrue(searchRow2, track) &&
-                    searchOrTrue(searchRow3, track) &&
-                    searchOrTrue(searchRow4, track) &&
-                    searchOrTrue(searchRow5, track) &&
-                    searchOrTrue(searchRow6, track)
-                );
-            });
-            setSearchResults(filteredResults);
-        }
-    }, [
-        tracks,
-        searchRow1,
-        searchRow2,
-        searchRow3,
-        searchRow4,
-        searchRow5,
-        searchRow6,
-        setSearchResults,
-        numberOfSearchRows,
-    ]);
-
-    // useEffect(() => {
-    //     // todo consider changing the column object to an array with 2 items instead of an object
-    //     // todo this would save time on having to run Object.keys etc
-
-    //     const columnIsEmpty = () => {
-    //         return Object.keys(column).length === 0;
-    //     };
-
-    //     if (searchResults) {
-    //         const col = Object.keys(column)[0];
-    //         const val = Object.values(column)[0];
-
-    //         // Adding in toLowerCase() since it was sorting words that started with lower case 'a' after capitalized 'Z'k
-    //         const sortedResults = val === 'up' ? sort(searchResults).desc((t) => t[col].toLowerCase()) : sort(searchResults).asc((t) => t[col].toLowerCase());
-
-    //         setSearchResults(sortedResults);
-    //         setSortIcon(val);
-    //     }
-    // }, [column]);
-
-    const renderSearchRows = () => {
-        switch (numberOfSearchRows) {
-            case 1:
-                return (
-                    <SearchRow
-                        FIELDS={FIELDS}
-                        rowNumber={1}
-                        numberOfSearchRows={numberOfSearchRows}
-                        setNumberOfSearchRows={setNumberOfSearchRows}
-                        searchField={searchRow1}
-                        setSearchField={setSearchRow1}
-                    ></SearchRow>
-                );
-            case 2:
-                return (
-                    <>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={1}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow1}
-                            setSearchField={setSearchRow1}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={2}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow2}
-                            setSearchField={setSearchRow2}
-                        ></SearchRow>
-                    </>
-                );
-            case 3:
-                return (
-                    <>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={1}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow1}
-                            setSearchField={setSearchRow1}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={2}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow2}
-                            setSearchField={setSearchRow2}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={3}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow3}
-                            setSearchField={setSearchRow3}
-                        ></SearchRow>
-                    </>
-                );
-            case 4:
-                return (
-                    <>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={1}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow1}
-                            setSearchField={setSearchRow1}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={2}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow2}
-                            setSearchField={setSearchRow2}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={3}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow3}
-                            setSearchField={setSearchRow3}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={4}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow4}
-                            setSearchField={setSearchRow4}
-                        ></SearchRow>
-                    </>
-                );
-            case 5:
-                return (
-                    <>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={1}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow1}
-                            setSearchField={setSearchRow1}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={2}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow2}
-                            setSearchField={setSearchRow2}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={3}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow3}
-                            setSearchField={setSearchRow3}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={4}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow4}
-                            setSearchField={setSearchRow4}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={5}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow5}
-                            setSearchField={setSearchRow5}
-                        ></SearchRow>
-                    </>
-                );
-            case 6:
-                return (
-                    <>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={1}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow1}
-                            setSearchField={setSearchRow1}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={2}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow2}
-                            setSearchField={setSearchRow2}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={3}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow3}
-                            setSearchField={setSearchRow3}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={4}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow4}
-                            setSearchField={setSearchRow4}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={5}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow5}
-                            setSearchField={setSearchRow5}
-                        ></SearchRow>
-                        <SearchRow
-                            FIELDS={FIELDS}
-                            rowNumber={6}
-                            numberOfSearchRows={numberOfSearchRows}
-                            setNumberOfSearchRows={setNumberOfSearchRows}
-                            searchField={searchRow6}
-                            setSearchField={setSearchRow6}
-                        ></SearchRow>
-                    </>
-                );
-            default:
-                return null;
-        }
+    //TODO: Add function here to handle searching of tracks
+    const searchTracks = async (e) => {
+        e.preventDefault();
     };
 
     const handleDeleteTracks = async () => {
@@ -661,7 +368,8 @@ const AllTracks = () => {
                                 {successMsg}
                             </p>
                             <form className="searchForm" onSubmit={(e) => e.preventDefault()}>
-                                {renderSearchRows()}
+                                {/*renderSearchRows()*/}
+                                <SearchRow FIELDS={FIELDS} searchField={searchField} setSearchField={setSearchField} />
                             </form>
                         </Container>
                         {isLoading ? (
@@ -671,7 +379,7 @@ const AllTracks = () => {
                             >
                                 <img src="dna.svg" alt="DNA molecule" />
                             </div>
-                        ) : searchResults.length ? (
+                        ) : tracks.length ? (
                             <>
                                 <div className="d-inline-block mb-2 ms-3">
                                     <p className="mb-1">{`${numberOfRecords} Records`}</p>
@@ -756,7 +464,7 @@ const AllTracks = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {searchResults.map((track, i) => (
+                                        {tracks.map((track, i) => (
                                             <tr key={track.rid}>
                                                 <td>
                                                     <div>
@@ -778,7 +486,7 @@ const AllTracks = () => {
                                                 </td>
                                                 <td>
                                                     <div className="td-content">
-                                                        {pageNumber == null ? i + 1 : i + 1 + (pageNumber - 1) * 500}
+                                                        {pageNumber == null ? i + 1 : i + 1 + (pageNumber - 1) * LIMIT}
                                                     </div>
                                                 </td>
                                                 <td>

@@ -39,6 +39,7 @@ function App() {
                     {/* private routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
                         <Route path="/records/:pageNumber?" element={<AllTracks />} />
+                        <Route path="/records/search/:pageNumber?" element={<AllTracks />} />
                     </Route>
                     <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}></Route>
                     <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
