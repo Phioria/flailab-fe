@@ -128,6 +128,7 @@ const AllTracks = () => {
 
         if (searching) {
             console.log('made it here');
+            console.log(`searchTerms: ${searchTerms}`);
         }
 
         getTracks();
