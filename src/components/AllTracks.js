@@ -88,7 +88,7 @@ const AllTracks = () => {
         const getTracks = async () => {
             try {
                 const response = searching
-                    ? await axiosPrivate.post(`${RECORDS_URL}/${LIMIT}/${offset}`, searchTerms, {
+                    ? await axiosPrivate.post(`${RECORDS_URL}/${LIMIT}/${offset}`, JSON.stringify(searchTerms), {
                           signal: newAbortSignal(5000),
                       })
                     : await axiosPrivate.get(`${RECORDS_URL}/${LIMIT}/${offset}`, {
@@ -128,7 +128,7 @@ const AllTracks = () => {
 
         if (searching) {
             console.log('made it here');
-            console.log(`searchTerms: ${searchTerms}`);
+            console.log(`searchTerms: ${JSON.stringify(searchTerms)}`);
         }
 
         getTracks();
