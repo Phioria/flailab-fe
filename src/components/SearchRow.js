@@ -2,7 +2,7 @@ import { Form } from 'react-bootstrap';
 
 const SearchRow = ({
     FIELDS, // Mapping over this to fill out the Select dropdown box
-    searchTerms, // Alias for the numbered searchField that gets passed in
+    searchTerms,
     setSearchTerms,
 }) => {
     return (
@@ -35,7 +35,7 @@ const SearchRow = ({
                         id="search-field"
                         type="text"
                         placeholder="Search Tracks"
-                        value={searchField.searchTerm}
+                        value={searchTerms.searchTerm}
                         onChange={(e) =>
                             setSearchTerms({
                                 ...searchTerms,
