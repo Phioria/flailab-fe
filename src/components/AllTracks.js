@@ -31,7 +31,7 @@ const AllTracks = () => {
 
     // State for Searching
     // { field: 'field', searchTerm: 'term' }
-    const [searchParameters, setSearchParameters] = useState([]);
+    const [searchField, setSearchField] = useState([]);
 
     // State for Editing, Deleting, Checkboxes
     const [selectedTracks, setSelectedTracks] = useState([]);
@@ -91,7 +91,7 @@ const AllTracks = () => {
                 console.log(`Total Rows: ${response.data.count}`);
                 // TODO: If there is a problem with fetching, perhaps set this differently
                 setNumberOfRecords(response.data.count);
-                const numberOfPages = Math.ceil(response.data.count / limit);
+                const numberOfPages = Math.ceil(response.data.count / LIMIT);
                 // Creates an array of sequential integers from 1 to the number of pages
                 // This will be used to generate the pagenation links on the page
                 const pagesArray = Array.from({ length: numberOfPages }, (v, i) => i + 1);
