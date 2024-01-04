@@ -33,6 +33,7 @@ const AllTracks = () => {
     // { field: 'field', searchTerm: 'term' }
     const [currentSearchTerm, setCurrentSearchTerm] = useState({ column: '', value: '' });
     const [searchTerms, setSearchTerms] = useState([]);
+    const [searching, setSearching] = useState(false);
 
     // State for Editing, Deleting, Checkboxes
     const [selectedTracks, setSelectedTracks] = useState([]);
@@ -84,9 +85,9 @@ const AllTracks = () => {
         // setting these manually for now. will change for pagenation after testing
         const offset = pageNumber == null ? 0 : (pageNumber - 1) * LIMIT;
 
-        const getTracks = async (doSearch) => {
+        const getTracks = async () => {
             try {
-                const response = doSearch
+                const response = searching
                     ? await axiosPrivate.post(`${RECORDS_URL}/${LIMIT}/${offset}`, searchTerms, {
                           signal: newAbortSignal(5000),
                       })
@@ -125,13 +126,13 @@ const AllTracks = () => {
         //! tracks, track count, number of pages, pages array, links to pagination
         //! the problem comes in when we click on a second page
 
-        getTracks(location.pathname.includes('search')); // true or false parameter
+        getTracks();
 
         return () => {
             isMounted = false;
             newAbortSignal(); // Abort immediately
         };
-    }, [axiosPrivate, location, navigate]);
+    }, [axiosPrivate, location, navigate, searching]);
 
     // The tracks selected are handled in two places
     // One is by using this function when the boxes change by being clicked
@@ -337,10 +338,7 @@ const AllTracks = () => {
         // todo: also add in badges showing what we're searching for...they should have an x on them to delete the search term
         setSearchTerms([...searchTerms, currentSearchTerm]);
         setCurrentSearchTerm({ column: '', value: '' }); // Reset the currentSearchTerm once it's been used
-        navigate('/records/search', {
-            state: { from: location },
-            replace: true,
-        });
+        setSearching(true);
     };
 
     return (
