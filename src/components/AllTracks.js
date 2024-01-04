@@ -31,7 +31,7 @@ const AllTracks = () => {
 
     // State for Searching
     // { field: 'field', searchTerm: 'term' }
-    const [searchField, setSearchField] = useState([]);
+    const [searchTerms, setSearchTerms] = useState([]);
 
     // State for Editing, Deleting, Checkboxes
     const [selectedTracks, setSelectedTracks] = useState([]);
@@ -77,16 +77,21 @@ const AllTracks = () => {
 
     useEffect(() => {
         let isMounted = true;
+        setIsLoading(true);
 
         // todo update to dynamic
         // setting these manually for now. will change for pagenation after testing
         const offset = pageNumber == null ? 0 : (pageNumber - 1) * LIMIT;
 
-        const getTracks = async () => {
+        const getTracks = async (doSearch) => {
             try {
-                const response = await axiosPrivate.get(`${RECORDS_URL}/${LIMIT}/${offset}`, {
-                    signal: newAbortSignal(5000), // Abort after 5 seconds
-                });
+                const response = doSearch
+                    ? await axiosPrivate.post(`${RECORDS_URL}/${LIMIT}/${offset}`, searchTerms, {
+                          signal: newAbortSignal(5000),
+                      })
+                    : await axiosPrivate.get(`${RECORDS_URL}/${LIMIT}/${offset}`, {
+                          signal: newAbortSignal(5000), // Abort after 5 seconds
+                      });
 
                 console.log(`Total Rows: ${response.data.count}`);
                 // TODO: If there is a problem with fetching, perhaps set this differently
@@ -99,6 +104,8 @@ const AllTracks = () => {
                 isMounted && setTracks(response.data.rows);
             } catch (err) {
                 console.error(err);
+                // TODO: instead of going to login page when there's an error, perhaps we should display an error
+                // todo: maybe based on the type of error we can decide if we should navigate to login or display an error
                 navigate('/login', {
                     state: { from: location },
                     replace: true,
@@ -108,8 +115,17 @@ const AllTracks = () => {
             }
         };
 
-        console.log(location.pathname);
-        getTracks();
+        //! What is the best way to do this
+        //! If we link to a different page with /search in the path,
+        //! Then do we need to have the search params listed in the url?
+        //! This could be problematic for multi part searches
+        //!
+        //! Maybe we don't use a separate path for searching
+        //! Maybe once we click search, we just change the following:
+        //! tracks, track count, number of pages, pages array, links to pagination
+        //! the problem comes in when we click on a second page
+
+        getTracks(location.pathname.includes('search')); // true or false parameter
 
         return () => {
             isMounted = false;
@@ -222,11 +238,6 @@ const AllTracks = () => {
             document.removeEventListener('change', handleToggleCheckboxes);
         };
     }, [tracks]);
-
-    //TODO: Add function here to handle searching of tracks
-    const searchTracks = async (e) => {
-        e.preventDefault();
-    };
 
     const handleDeleteTracks = async () => {
         if (!selectedTracks.length) {
@@ -369,7 +380,7 @@ const AllTracks = () => {
                             </p>
                             <form className="searchForm" onSubmit={(e) => e.preventDefault()}>
                                 {/*renderSearchRows()*/}
-                                <SearchRow FIELDS={FIELDS} searchField={searchField} setSearchField={setSearchField} />
+                                <SearchRow FIELDS={FIELDS} searchTerms={searchTerms} setSearchTerms={setSearchTerms} />
                             </form>
                         </Container>
                         {isLoading ? (
@@ -377,7 +388,7 @@ const AllTracks = () => {
                                 className="d-flex justify-content-center"
                                 aria-label="Spinning DNA molecule representing that tracks are loading"
                             >
-                                <img src="dna.svg" alt="DNA molecule" />
+                                <img src="/dna.svg" alt="DNA molecule" />
                             </div>
                         ) : tracks.length ? (
                             <>

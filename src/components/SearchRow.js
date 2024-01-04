@@ -2,8 +2,8 @@ import { Form } from 'react-bootstrap';
 
 const SearchRow = ({
     FIELDS, // Mapping over this to fill out the Select dropdown box
-    searchField, // Alias for the numbered searchField that gets passed in
-    setSearchField,
+    searchTerms, // Alias for the numbered searchField that gets passed in
+    setSearchTerms,
 }) => {
     return (
         <>
@@ -14,8 +14,8 @@ const SearchRow = ({
                         id="select-field"
                         aria-label="Select Field to Search"
                         onChange={(e) =>
-                            setSearchField({
-                                ...searchField,
+                            setSearchTerms({
+                                ...searchTerms,
                                 field: e.target.value,
                             })
                         }
@@ -37,14 +37,14 @@ const SearchRow = ({
                         placeholder="Search Tracks"
                         value={searchField.searchTerm}
                         onChange={(e) =>
-                            setSearchField({
-                                ...searchField,
+                            setSearchTerms({
+                                ...searchTerms,
                                 searchTerm: e.target.value,
                             })
                         }
                     />
                 </div>
-                <div className="btn-primary">Search</div>
+                <div className="col-3 btn-primary">Search</div>
                 {/* Insert Search Button Here */}
             </div>
         </>
