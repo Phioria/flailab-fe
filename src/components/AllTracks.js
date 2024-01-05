@@ -139,7 +139,7 @@ const AllTracks = () => {
             isMounted = false;
             newAbortSignal(); // Abort immediately
         };
-    }, [axiosPrivate, location, navigate, searching]);
+    }, [axiosPrivate, location, navigate, searching, searchTerms]);
 
     // The tracks selected are handled in two places
     // One is by using this function when the boxes change by being clicked
@@ -350,7 +350,14 @@ const AllTracks = () => {
 
     const handleRemoveSearchTerm = (column) => {
         const remainingSearchTerms = searchTerms.filter((term) => term.column !== column);
-        setSearchTerms(remainingSearchTerms);
+        if (remainingSearchTerms.length) {
+            setSearchTerms(remainingSearchTerms);
+        } else {
+            // If there are no search terms left in the array, set searching to false
+            // This should cause us to reload all tracks
+            setSearchTerms([]);
+            setSearching(false);
+        }
     };
 
     return (
