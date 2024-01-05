@@ -7,6 +7,7 @@ import { Table } from 'react-bootstrap';
 import { Container, Button } from 'react-bootstrap';
 import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
+import { XCircle } from 'react-bootstrap-icons';
 import SearchRow from './SearchRow';
 import useWindowSize from '../hooks/useWindowSize';
 import Modal from 'react-bootstrap/Modal';
@@ -407,7 +408,10 @@ const AllTracks = () => {
                                 {searching && (
                                     <Stack direction="horizontal" gap={2}>
                                         {searchTerms.map((term) => (
-                                            <Badge pill bg="primary">{`${term.column}: ${term.value}`}</Badge>
+                                            <Badge pill bg="primary" className="mt-2">
+                                                {`${term.column}: ${term.value}`}
+                                                <XCircle />
+                                            </Badge>
                                         ))}
                                     </Stack>
                                 )}
