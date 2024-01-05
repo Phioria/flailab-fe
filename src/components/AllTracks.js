@@ -360,9 +360,7 @@ const AllTracks = () => {
         const remainingSearchTerms = searchTerms.filter((term) => term.column !== column);
         if (remainingSearchTerms.length) {
             // Add field back to options
-            const fieldToAdd = Object.entries(FIELDS).filter((field) => {
-                Object.keys(field) == column;
-            });
+            const fieldToAdd = Object.fromEntries(Object.entries(FIELDS).filter(([k, v]) => k == column));
             setUnusedFields({ ...fieldToAdd, ...unusedFields });
 
             setSearchTerms(remainingSearchTerms);
