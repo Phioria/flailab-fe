@@ -348,6 +348,11 @@ const AllTracks = () => {
         setSearching(true);
     };
 
+    const handleRemoveSearchTerm = (column) => {
+        const remainingSearchTerms = searchTerms.filter((term) => term.column !== column);
+        setSearchTerms(remainingSearchTerms);
+    };
+
     return (
         <div id="ob-wrap">
             <Header />
@@ -410,7 +415,10 @@ const AllTracks = () => {
                                         {searchTerms.map((term) => (
                                             <Badge pill bg="primary" className="mt-2">
                                                 {`${term.column}: ${term.value}`}
-                                                <XCircle />
+                                                <XCircle
+                                                    className="ms-1"
+                                                    onClick={() => handleRemoveSearchTerm(term.column)}
+                                                />
                                             </Badge>
                                         ))}
                                     </Stack>
