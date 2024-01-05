@@ -45,7 +45,11 @@ const SearchRow = ({
                         }
                     />
                 </div>
-                <button className="col-1 btn btn-primary" onClick={handleSearch}>
+                <button
+                    className="col-1 btn btn-primary"
+                    onClick={handleSearch}
+                    disabled={currentSearchTerm['column'] == ''}
+                >
                     Search
                 </button>
             </div>

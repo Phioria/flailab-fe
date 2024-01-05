@@ -340,6 +340,7 @@ const AllTracks = () => {
     const handleSearch = () => {
         //console.log(`currentSearchTerm: ${JSON.stringify(currentSearchTerm)}`);
         //console.log(`searchTerms: ${searchTerms}`);
+        if (currentSearchTerm['column'] == '') return; // This should disable searching if a user hasn't selected a column yet
         formRef.current.reset();
         setSearchTerms([...searchTerms, currentSearchTerm]);
         setCurrentSearchTerm({ column: '', value: '' }); // Reset the currentSearchTerm once it's been used
