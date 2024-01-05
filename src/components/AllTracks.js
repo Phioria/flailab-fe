@@ -425,7 +425,7 @@ const AllTracks = () => {
                             </p>
                             <form ref={formRef} className="searchForm" onSubmit={(e) => e.preventDefault()}>
                                 <SearchRow
-                                    FIELDS={FIELDS}
+                                    unusedFields={unusedFields}
                                     currentSearchTerm={currentSearchTerm}
                                     setCurrentSearchTerm={setCurrentSearchTerm}
                                     handleSearch={handleSearch}

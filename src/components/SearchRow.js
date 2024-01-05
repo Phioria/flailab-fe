@@ -1,7 +1,7 @@
 import { Form } from 'react-bootstrap';
 
 const SearchRow = ({
-    FIELDS, // Mapping over this to fill out the Select dropdown box
+    unusedFields, // Mapping over this to fill out the Select dropdown box
     currentSearchTerm,
     setCurrentSearchTerm,
     handleSearch,
@@ -22,7 +22,7 @@ const SearchRow = ({
                         }
                     >
                         <option>Select a Field to Search</option>
-                        {Object.entries(FIELDS).map(([field, name]) => (
+                        {Object.entries(unusedFields).map(([field, name]) => (
                             <option key={field} value={field}>
                                 {name}
                             </option>
