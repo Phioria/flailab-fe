@@ -5,7 +5,8 @@ import { newAbortSignal } from '../api/axios';
 import { useNavigate, useLocation, useParams, Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import { Container, Button } from 'react-bootstrap';
-
+import Badge from 'react-bootstrap/Badge';
+import Stack from 'react-bootstrap/Stack';
 import SearchRow from './SearchRow';
 import useWindowSize from '../hooks/useWindowSize';
 import Modal from 'react-bootstrap/Modal';
@@ -403,9 +404,13 @@ const AllTracks = () => {
                                     setCurrentSearchTerm={setCurrentSearchTerm}
                                     handleSearch={handleSearch}
                                 />
-                                {searchTerms.map((term) => (
-                                    <span className="badge badge-info">{`${term.column}: ${term.value}`}</span>
-                                ))}
+                                {searching && (
+                                    <Stack direction="horizontal" gap={2}>
+                                        {searchTerms.map((term) => (
+                                            <Badge pill bg="primary">{`${term.column}: ${term.value}`}</Badge>
+                                        ))}
+                                    </Stack>
+                                )}
                             </form>
                         </Container>
                         {isLoading ? (
