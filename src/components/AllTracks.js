@@ -443,20 +443,21 @@ const AllTracks = () => {
                             <>
                                 <div className="d-inline-block mb-2 ms-3">
                                     <p className="mb-1">{`${numberOfRecords} Records`}</p>
-                                    {pages.map((page) => (
-                                        <Link
-                                            to={`/records/${page}`}
-                                            className={
-                                                pageNumber == null && page == 1
-                                                    ? 'link-dark me-3 text-decoration-none'
-                                                    : page == pageNumber
-                                                    ? 'link-dark me-3 text-decoration-none'
-                                                    : 'link-dark me-3'
-                                            }
-                                        >
-                                            {page}
-                                        </Link>
-                                    ))}
+                                    {pages.length > 1 && // Only display Page Links where there is more than one page
+                                        pages.map((page) => (
+                                            <Link
+                                                to={`/records/${page}`}
+                                                className={
+                                                    pageNumber == null && page == 1
+                                                        ? 'link-dark me-3 text-decoration-none'
+                                                        : page == pageNumber
+                                                        ? 'link-dark me-3 text-decoration-none'
+                                                        : 'link-dark me-3'
+                                                }
+                                            >
+                                                {page}
+                                            </Link>
+                                        ))}
                                 </div>
                                 <Table
                                     striped
