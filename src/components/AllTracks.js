@@ -25,7 +25,7 @@ const AllTracks = () => {
     const { width } = useWindowSize();
     const errRef = useRef();
     const successRef = useRef();
-    const inputRef = useRef();
+    const formRef = useRef();
     const [isLoading, setIsLoading] = useState(true);
 
     const [tracks, setTracks] = useState([]);
@@ -340,7 +340,7 @@ const AllTracks = () => {
     const handleSearch = () => {
         //console.log(`currentSearchTerm: ${JSON.stringify(currentSearchTerm)}`);
         //console.log(`searchTerms: ${searchTerms}`);
-        inputRef.current.reset();
+        formRef.current.reset();
         setSearchTerms([...searchTerms, currentSearchTerm]);
         setCurrentSearchTerm({ column: '', value: '' }); // Reset the currentSearchTerm once it's been used
         setSearching(true);
@@ -408,13 +408,12 @@ const AllTracks = () => {
                             <p ref={successRef} className={successMsg ? 'successmsg w-50 fade-5' : 'offscreen'}>
                                 {successMsg}
                             </p>
-                            <form className="searchForm" onSubmit={(e) => e.preventDefault()}>
+                            <form ref={formRef} className="searchForm" onSubmit={(e) => e.preventDefault()}>
                                 <SearchRow
                                     FIELDS={FIELDS}
                                     currentSearchTerm={currentSearchTerm}
                                     setCurrentSearchTerm={setCurrentSearchTerm}
                                     handleSearch={handleSearch}
-                                    inputRef={inputRef}
                                 />
                                 {searching && (
                                     <Stack direction="horizontal" gap={2}>
