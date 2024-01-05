@@ -88,7 +88,7 @@ const AllTracks = () => {
         const getTracks = async () => {
             try {
                 const response = searching
-                    ? await axiosPrivate.post(`${RECORDS_URL}/${LIMIT}/${offset}`, JSON.stringify(searchTerms), {
+                    ? await axiosPrivate.post(`${RECORDS_URL}/${LIMIT}/${offset}`, JSON.stringify({ searchTerms }), {
                           signal: newAbortSignal(5000),
                       })
                     : await axiosPrivate.get(`${RECORDS_URL}/${LIMIT}/${offset}`, {
