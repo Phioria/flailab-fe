@@ -45,7 +45,7 @@ const SearchRow = ({
                         }
                     />
                 </div>
-                <button className="col-2 btn btn-primary my-3 mx-3" onClick={handleSearch}>
+                <button className="col-1 btn btn-primary" onClick={handleSearch}>
                     Search
                 </button>
             </div>

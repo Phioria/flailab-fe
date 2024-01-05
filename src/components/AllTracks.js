@@ -403,6 +403,9 @@ const AllTracks = () => {
                                     setCurrentSearchTerm={setCurrentSearchTerm}
                                     handleSearch={handleSearch}
                                 />
+                                {searchTerms.map((term) => (
+                                    <span className="badge badge-info">{`${term.column}: ${term.value}`}</span>
+                                ))}
                             </form>
                         </Container>
                         {isLoading ? (
