@@ -1,10 +1,12 @@
 import { Form } from 'react-bootstrap';
+import { useRef } from 'react';
 
 const SearchRow = ({
     FIELDS, // Mapping over this to fill out the Select dropdown box
     currentSearchTerm,
     setCurrentSearchTerm,
     handleSearch,
+    inputRef,
 }) => {
     return (
         <>
@@ -13,6 +15,7 @@ const SearchRow = ({
                     <label htmlFor="select-field">Select Field</label>
                     <Form.Select
                         id="select-field"
+                        ref={inputRef}
                         aria-label="Select Field to Search"
                         onChange={(e) =>
                             setCurrentSearchTerm({

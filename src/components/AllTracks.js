@@ -25,6 +25,7 @@ const AllTracks = () => {
     const { width } = useWindowSize();
     const errRef = useRef();
     const successRef = useRef();
+    const inputRef = useRef();
     const [isLoading, setIsLoading] = useState(true);
 
     const [tracks, setTracks] = useState([]);
@@ -337,12 +338,9 @@ const AllTracks = () => {
     };
 
     const handleSearch = () => {
-        console.log(`currentSearchTerm: ${JSON.stringify(currentSearchTerm)}`);
-        console.log(`searchTerms: ${searchTerms}`);
-
-        // TODO: We need to add in a way to clear the search terms when we're no longer using them
-        // todo: perhaps add this into the primary useEffect and check to see if we're searching or not
-        // todo: also add in badges showing what we're searching for...they should have an x on them to delete the search term
+        //console.log(`currentSearchTerm: ${JSON.stringify(currentSearchTerm)}`);
+        //console.log(`searchTerms: ${searchTerms}`);
+        inputRef.current.reset();
         setSearchTerms([...searchTerms, currentSearchTerm]);
         setCurrentSearchTerm({ column: '', value: '' }); // Reset the currentSearchTerm once it's been used
         setSearching(true);
@@ -416,6 +414,7 @@ const AllTracks = () => {
                                     currentSearchTerm={currentSearchTerm}
                                     setCurrentSearchTerm={setCurrentSearchTerm}
                                     handleSearch={handleSearch}
+                                    inputRef={inputRef}
                                 />
                                 {searching && (
                                     <Stack direction="horizontal" gap={2}>
