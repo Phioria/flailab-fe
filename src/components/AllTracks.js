@@ -80,6 +80,8 @@ const AllTracks = () => {
         reads_mapped_to_minus: 'Reads Mapped to -',
     };
 
+    const [unusedFields, setUnusedFields] = useState(FIELDS);
+
     useEffect(() => {
         let isMounted = true;
         setIsLoading(true);
@@ -342,6 +344,13 @@ const AllTracks = () => {
         //console.log(`searchTerms: ${searchTerms}`);
         if (currentSearchTerm['column'] == '') return; // This should disable searching if a user hasn't selected a column yet
         formRef.current.reset();
+
+        // Remove current field from options once it's been selected
+        const currentField = currentSearchTerm['column'];
+        const copyUnusedFields = { ...unusedFields };
+        delete copyUnusedFields[currentField];
+        setUnusedFields(copyUnusedFields);
+
         setSearchTerms([...searchTerms, currentSearchTerm]);
         setCurrentSearchTerm({ column: '', value: '' }); // Reset the currentSearchTerm once it's been used
         setSearching(true);
@@ -350,10 +359,17 @@ const AllTracks = () => {
     const handleRemoveSearchTerm = (column) => {
         const remainingSearchTerms = searchTerms.filter((term) => term.column !== column);
         if (remainingSearchTerms.length) {
+            // Add field back to options
+            const fieldToAdd = Object.entries(FIELDS).filter((field) => {
+                Object.keys(field) == column;
+            });
+            setUnusedFields({ ...fieldToAdd, ...unusedFields });
+
             setSearchTerms(remainingSearchTerms);
         } else {
             // If there are no search terms left in the array, set searching to false
             // This should cause us to reload all tracks
+            setUnusedFields(FIELDS);
             setSearchTerms([]);
             setSearching(false);
         }
