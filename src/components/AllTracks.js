@@ -438,7 +438,7 @@ const AllTracks = () => {
                             >
                                 <img src="/dna.svg" alt="DNA molecule" />
                             </div>
-                        ) : tracks.length ? (
+                        ) : numberOfRecords ? ( // Changed from tracks.length...was breaking when searching
                             <>
                                 <div className="d-inline-block mb-2 ms-3">
                                     <p className="mb-1">{`${numberOfRecords} Records`}</p>
