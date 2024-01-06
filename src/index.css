@@ -200,16 +200,16 @@ button {
     height: 500px;
     margin: 0;
 }
-/*
-.jumbotron .btn-primary {
+
+.jumbotron .btn-warning {
     background: #ffbe26;
     border-color: #000;
     color: #000;
 }
-.jumbotron .btn-primary:hover {
+.jumbotron .btn-warning:hover {
     background: #ffe29d;
 }
-*/
+
 .jumbotron p {
     color: #fff;
     max-width: 75%;
@@ -301,7 +301,7 @@ button {
     color: crimson;
 }
 
-.btn-primary {
+.btn-warning {
     background: #ffbe26;
     border-color: #000;
     color: #000;
