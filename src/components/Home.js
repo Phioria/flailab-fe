@@ -19,10 +19,10 @@ const Home = () => {
                         <></>
                     ) : (
                         <>
-                            <Link to="/login" className="me-3 btn btn-primary" role="button">
+                            <Link to="/login" className="me-3 btn btn-warning" role="button">
                                 Sign In
                             </Link>
-                            <Link to="/register" className="btn btn-primary" role="button">
+                            <Link to="/register" className="btn btn-warning" role="button">
                                 Register
                             </Link>
                         </>

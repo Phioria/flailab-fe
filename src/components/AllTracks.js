@@ -663,7 +663,7 @@ const AllTracks = () => {
                                 </h5>
                                 <button
                                     className={
-                                        width < 576 ? 'btn btn-primary mt-0 mb-2 me-3' : 'btn btn-primary my-3 mx-3'
+                                        width < 576 ? 'btn btn-warning mt-0 mb-2 me-3' : 'btn btn-warning my-3 mx-3'
                                     }
                                     onClick={handleEditTracks}
                                 >
@@ -671,7 +671,7 @@ const AllTracks = () => {
                                 </button>
                                 <button
                                     className={
-                                        width < 576 ? 'btn btn-primary mt-0 mb-2 me-3' : 'btn btn-primary my-3 me-3'
+                                        width < 576 ? 'btn btn-warning mt-0 mb-2 me-3' : 'btn btn-warning my-3 me-3'
                                     }
                                     onClick={handleDownloadTracks}
                                 >

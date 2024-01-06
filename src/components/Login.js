@@ -102,7 +102,7 @@ const Login = () => {
                     </p>
                     <button
                         onClick={handleReset}
-                        className={needsReset ? 'mt-2 mb-3 w-75 btn btn-primary' : 'offscreen'}
+                        className={needsReset ? 'mt-2 mb-3 w-75 btn btn-warning' : 'offscreen'}
                     >
                         Resend Email
                     </button>
@@ -127,7 +127,7 @@ const Login = () => {
                             value={pwd}
                             required
                         />
-                        <button className="mt-4 w-50 btn btn-primary">Sign In</button>
+                        <button className="mt-4 w-50 btn btn-warning">Sign In</button>
                         <div className="persistCheck">
                             <input type="checkbox" id="persist" onChange={togglePersist} checked={persist} />
                             <label htmlFor="persist">Trust this device</label>

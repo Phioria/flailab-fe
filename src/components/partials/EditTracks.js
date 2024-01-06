@@ -267,7 +267,7 @@ const EditTracks = ({
                         ))}
                     </tbody>
                 </Table>
-                <button className="btn btn-primary mx-3" onClick={() => setShowConfirmation(true)}>
+                <button className="btn btn-warning mx-3" onClick={() => setShowConfirmation(true)}>
                     Submit Edits
                 </button>
                 <button className="btn btn-secondary mx-3" onClick={handleClose}>

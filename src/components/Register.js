@@ -140,7 +140,7 @@ const Register = () => {
                 <main className="container-fluid d-flex flex-column justify-content-start">
                     <section className="container-fluid d-flex flex-grow-1 flex-column mt-5 mx-4">
                         <h1>Success!</h1>
-                        <button className="mt-4 w-50 btn btn-primary">
+                        <button className="mt-4 w-50 btn btn-warning">
                             <Link to="/login">Sign In</Link>
                         </button>
                     </section>
@@ -254,7 +254,12 @@ const Register = () => {
                                 onFocus={() => setFirstNameFocus(true)}
                                 onBlur={() => setFirstNameFocus(false)}
                             />
-                            <p id="firstNameNote" className={firstNameFocus && firstName && !validFirstName ? 'instructions' : 'offscreen'}>
+                            <p
+                                id="firstNameNote"
+                                className={
+                                    firstNameFocus && firstName && !validFirstName ? 'instructions' : 'offscreen'
+                                }
+                            >
                                 <FontAwesomeIcon icon={faInfoCircle} />
                                 Name must be between 1 and 20 characters with no special characters used.
                             </p>
@@ -278,14 +283,19 @@ const Register = () => {
                                 onFocus={() => setLastNameFocus(true)}
                                 onBlur={() => setLastNameFocus(false)}
                             />
-                            <p id="lastNameNote" className={lastNameFocus && lastName && !validLastName ? 'instructions' : 'offscreen'}>
+                            <p
+                                id="lastNameNote"
+                                className={lastNameFocus && lastName && !validLastName ? 'instructions' : 'offscreen'}
+                            >
                                 <FontAwesomeIcon icon={faInfoCircle} />
                                 Name must be between 1 and 20 characters with no special characters used.
                             </p>
 
                             <button
-                                className="mt-4 w-50 btn btn-primary"
-                                disabled={!validName || !validPwd || !validMatch || !firstName || !lastName ? true : false}
+                                className="mt-4 w-50 btn btn-warning"
+                                disabled={
+                                    !validName || !validPwd || !validMatch || !firstName || !lastName ? true : false
+                                }
                             >
                                 Sign Up
                             </button>

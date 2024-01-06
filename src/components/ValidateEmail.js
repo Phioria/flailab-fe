@@ -56,7 +56,7 @@ const ValidateEmail = () => {
                 <main className="contain-fluid d-flex flex-column justify-content-start">
                     <section className="contain-fluid d-flex flex-grow-1 flex-column mt-5 px-4">
                         <h3 className="py-4">Account Validated!</h3>
-                        <button onClick={gotoLogin} className="mt-4 w-50 btn btn-primary">
+                        <button onClick={gotoLogin} className="mt-4 w-50 btn btn-warning">
                             Sign In
                         </button>
                     </section>
@@ -65,7 +65,7 @@ const ValidateEmail = () => {
                 <main className="contain-fluid d-flex flex-column justify-content-start">
                     <section className="contain-fluid d-flex flex-grow-1 flex-column mt-5 px-4">
                         <p className="py-4 errormsg">{errMsg ? `Error: ${errMsg}` : 'An error has occurred.'}</p>
-                        <button className="mt-4 w-50 btn btn-primary">
+                        <button className="mt-4 w-50 btn btn-warning">
                             <Link to="/">Home</Link>
                         </button>
                     </section>

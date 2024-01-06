@@ -68,8 +68,15 @@ const Reset = () => {
                         <h1>Reset Your Password</h1>
                         <form onSubmit={handleSubmit}>
                             <label htmlFor="username">E-mail Address:</label>
-                            <input type="text" id="username" ref={userRef} autoComplete="off" onChange={(e) => setUser(e.target.value)} required />
-                            <button className="mt-4 w-50 btn btn-primary">Reset</button>
+                            <input
+                                type="text"
+                                id="username"
+                                ref={userRef}
+                                autoComplete="off"
+                                onChange={(e) => setUser(e.target.value)}
+                                required
+                            />
+                            <button className="mt-4 w-50 btn btn-warning">Reset</button>
                         </form>
                     </section>
                 </main>

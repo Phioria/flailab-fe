@@ -126,7 +126,7 @@ const ResetLink = () => {
                         ) : (
                             <>
                                 <p className="py-4">Your password has been updated successfully!</p>
-                                <button className="mt-4 w-50 btn btn-primary">
+                                <button className="mt-4 w-50 btn btn-warning">
                                     <Link to="/login">Sign In</Link>
                                 </button>
                             </>
@@ -163,7 +163,10 @@ const ResetLink = () => {
                                         onFocus={() => setPwdFocus(true)}
                                         onBlur={() => setPwdFocus(false)}
                                     />
-                                    <p id="pwdnote" className={pwdFocus && pwd && !validPwd ? 'instructions' : 'offscreen'}>
+                                    <p
+                                        id="pwdnote"
+                                        className={pwdFocus && pwd && !validPwd ? 'instructions' : 'offscreen'}
+                                    >
                                         <FontAwesomeIcon icon={faInfoCircle} />
                                         8 - 24 characters.
                                         <br />
@@ -194,12 +197,15 @@ const ResetLink = () => {
                                         onFocus={() => setMatchFocus(true)}
                                         onBlur={() => setMatchFocus(false)}
                                     />
-                                    <p id="confirmnote" className={matchFocus && !validMatch ? 'instructions' : 'offscreen'}>
+                                    <p
+                                        id="confirmnote"
+                                        className={matchFocus && !validMatch ? 'instructions' : 'offscreen'}
+                                    >
                                         <FontAwesomeIcon icon={faInfoCircle} />
                                         Must match the first password input field.
                                     </p>
 
-                                    <button className="mt-4 w-50 btn btn-primary" disabled={!validPwd || !validMatch}>
+                                    <button className="mt-4 w-50 btn btn-warning" disabled={!validPwd || !validMatch}>
                                         Reset
                                     </button>
                                 </form>
@@ -208,7 +214,11 @@ const ResetLink = () => {
                     ) : (
                         <main className="container-fluid d-flex flex-column justify-content-start">
                             <section className="container-fluid d-flex flex-grow-1 flex-column mt-5 px-4">
-                                {errMsg ? <p className="errmsg">{errMsg}</p> : <p className="errmsg">Password Reset Validation Failed</p>}
+                                {errMsg ? (
+                                    <p className="errmsg">{errMsg}</p>
+                                ) : (
+                                    <p className="errmsg">Password Reset Validation Failed</p>
+                                )}
                             </section>
                         </main>
                     )}

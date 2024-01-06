@@ -127,7 +127,7 @@ const Upload = () => {
                                 accept=".csv"
                                 onChange={(e) => setUploadFile(e.target.files[0])}
                             />
-                            <button type="submit" className="btn btn-primary">
+                            <button type="submit" className="btn btn-warning">
                                 Submit
                             </button>
                         </div>
