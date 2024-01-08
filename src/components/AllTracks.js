@@ -121,16 +121,6 @@ const AllTracks = () => {
             }
         };
 
-        //! What is the best way to do this
-        //! If we link to a different page with /search in the path,
-        //! Then do we need to have the search params listed in the url?
-        //! This could be problematic for multi part searches
-        //!
-        //! Maybe we don't use a separate path for searching
-        //! Maybe once we click search, we just change the following:
-        //! tracks, track count, number of pages, pages array, links to pagination
-        //! the problem comes in when we click on a second page
-
         if (searching) {
             console.log('made it here');
             console.log(`searchTerms: ${JSON.stringify(searchTerms)}`);
@@ -436,7 +426,7 @@ const AllTracks = () => {
                                             <Badge pill bg="primary" className="mt-2">
                                                 {`${term.column}: ${term.value}`}
                                                 <XCircle
-                                                    className="ms-1"
+                                                    className="ms-1 clickable"
                                                     onClick={() => handleRemoveSearchTerm(term.column)}
                                                 />
                                             </Badge>

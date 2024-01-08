@@ -28,16 +28,6 @@ body {
     min-height: 100%;
 }
 
-/*
-.App {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 1rem 0.5rem;
-}
-*/
 .App {
     min-width: 400px;
     min-height: 100vh;
@@ -46,11 +36,6 @@ body {
 }
 
 main {
-    /*display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100%;*/
     position: relative;
     top: 66px;
     padding: 1rem 0.5rem;
@@ -68,7 +53,6 @@ section {
     flex-direction: column;
     justify-content: flex-start;
     padding: 1rem;
-    /*background-color: rgba(0, 0, 0, 0.4);*/
     background-color: #064785;
     border-radius: 10px;
     box-shadow: 5px 5px 10px 0 black;
@@ -271,15 +255,6 @@ button {
     border-radius: 0.5rem 0 0 0.5rem;
 }
 
-/* .callout button {
-    background-color: rgb(8, 121, 144);
-    color: #fff;
-    border-color: #043238;
-}
-.callout button:hover {
-    background-color: rgb(36, 155, 179);
-} */
-
 .callout-info {
 }
 .callout-warning {
@@ -322,4 +297,8 @@ th {
     max-width: 350px;
     overflow: auto;
     white-space: nowrap;
+}
+
+.clickable {
+    cursor: pointer;
 }
