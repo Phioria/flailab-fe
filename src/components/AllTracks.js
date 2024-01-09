@@ -64,10 +64,10 @@ const AllTracks = () => {
         sex: 'Sex',
         paper: 'Paper',
         srr_id: 'SRR ID',
-        total_mapped: 'Total Mapped',
+        number_mapped: 'Number Mapped',
+        library_size: 'Library Size',
         percent_aligned: 'Percent Aligned',
         percent_uniquely_mapped: 'Percent Uniquely Mapped',
-        submitted_by: 'Submitted By',
         author: 'Author',
         project: 'Project',
         file_type: 'File Type',
@@ -78,6 +78,7 @@ const AllTracks = () => {
         non_splice_reads: 'Non-Splice Reads',
         reads_mapped_to_plus: 'Reads Mapped to +',
         reads_mapped_to_minus: 'Reads Mapped to -',
+        submitted_by: 'Submitted By',
     };
 
     const [unusedFields, setUnusedFields] = useState(FIELDS);
@@ -593,16 +594,16 @@ const AllTracks = () => {
                                                     <div className="td-content">{track.srr_id}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="td-content">{track.total_mapped}</div>
+                                                    <div className="td-content">{track.number_mapped}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.library_size}</div>
                                                 </td>
                                                 <td>
                                                     <div className="td-content">{track.percent_aligned}</div>
                                                 </td>
                                                 <td>
                                                     <div className="td-content">{track.percent_uniquely_mapped}</div>
-                                                </td>
-                                                <td>
-                                                    <div className="td-content">{track.submitted_by}</div>
                                                 </td>
                                                 <td>
                                                     <div className="td-content">{track.author}</div>
@@ -633,6 +634,9 @@ const AllTracks = () => {
                                                 </td>
                                                 <td>
                                                     <div className="td-content">{track.reads_mapped_to_minus}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="td-content">{track.submitted_by}</div>
                                                 </td>
                                             </tr>
                                         ))}

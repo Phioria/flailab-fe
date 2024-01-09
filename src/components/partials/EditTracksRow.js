@@ -28,17 +28,15 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
         // but for now, I'll leave out submitTracks from the array and just live with the react warning
 
         if (row !== track) {
-            console.log('running');
             const otherTracks = submitTracks.filter((track) => track.rid !== id);
             setSubmitTracks([...otherTracks, row]);
-            //console.log(submitTracks);
         }
         // eslint-disable-next-line
     }, [row]);
 
-    // Admin Required Fields = dataset, species, sequencing_type, file_location, tissue
+    // Admin Required Fields = dataset, species, sequencing_type, file_location, tissue, library_size, srr_id
     // Editor Required Fields = dataset, species, track_name, sequencing_type, file_location, mutant, tissue,
-    //                          sex, total_mapped, percent_aligned, percent_uniquely_mapped, author
+    //                          library_size, srr_id, sex, number_mapped, percent_aligned, percent_uniquely_mapped, author
     return (
         <tr>
             <td>
@@ -212,6 +210,7 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
                         autoComplete="off"
                         value={row.srr_id}
                         onChange={(e) => setRow({ ...row, srr_id: e.target.value })}
+                        required
                     />
                 </div>
             </td>
@@ -219,12 +218,26 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
                 <div className="td-content">
                     <input
                         className="small-input"
-                        id={`${id}-total_mapped`}
+                        id={`${id}-number_mapped`}
                         form="edit-form"
                         type="text"
                         autoComplete="off"
-                        value={row.total_mapped}
-                        onChange={(e) => setRow({ ...row, total_mapped: e.target.value })}
+                        value={row.number_mapped}
+                        onChange={(e) => setRow({ ...row, number_mapped: e.target.value })}
+                    />
+                </div>
+            </td>
+            <td>
+                <div className="td-content">
+                    <input
+                        className="small-input"
+                        id={`${id}-library_size`}
+                        form="edit-form"
+                        type="text"
+                        autoComplete="off"
+                        value={row.library_size}
+                        onChange={(e) => setRow({ ...row, library_size: e.target.value })}
+                        required
                     />
                 </div>
             </td>
@@ -251,19 +264,6 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
                         autoComplete="off"
                         value={row.percent_uniquely_mapped}
                         onChange={(e) => setRow({ ...row, percent_uniquely_mapped: e.target.value })}
-                    />
-                </div>
-            </td>
-            <td>
-                <div className="td-content">
-                    <input
-                        className="small-input"
-                        id={`${id}-submitted_by`}
-                        form="edit-form"
-                        type="email"
-                        autoComplete="off"
-                        value={row.submitted_by}
-                        onChange={(e) => setRow({ ...row, submitted_by: e.target.value })}
                     />
                 </div>
             </td>
@@ -394,6 +394,19 @@ const EditTracksRow = ({ track, submitTracks, setSubmitTracks }) => {
                         autoComplete="off"
                         value={row.reads_mapped_to_minus}
                         onChange={(e) => setRow({ ...row, reads_mapped_to_minus: e.target.value })}
+                    />
+                </div>
+            </td>
+            <td>
+                <div className="td-content">
+                    <input
+                        className="small-input"
+                        id={`${id}-submitted_by`}
+                        form="edit-form"
+                        type="email"
+                        autoComplete="off"
+                        value={row.submitted_by}
+                        onChange={(e) => setRow({ ...row, submitted_by: e.target.value })}
                     />
                 </div>
             </td>

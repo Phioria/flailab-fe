@@ -42,10 +42,10 @@ const EditTracks = ({
         'sex',
         'paper',
         'srr_id',
-        'total_mapped',
+        'number_mapped',
+        'library_size',
         'percent_aligned',
         'percent_uniquely_mapped',
-        'submitted_by',
         'author',
         'project',
         'file_type',
@@ -56,6 +56,7 @@ const EditTracks = ({
         'reads_mapped_to_minus',
         'splice_reads',
         'non_splice_reads',
+        'submitted_by',
     ];
 
     // Once component loads, filter the 'tracks' array for rids that match the ids in selectedTracks
@@ -93,15 +94,27 @@ const EditTracks = ({
         const sequencingTypeResult =
             isNotNullOrUndefined(track, 'sequencing_type') && track.sequencing_type.trim().length;
         const fileLocationResult = isNotNullOrUndefined(track, 'file_location') && track.file_location.trim().length;
-        const tissueResult = isNotNullOrUndefined(track, 'tissue') && track.tissue.trim().length;
+        //const tissueResult = isNotNullOrUndefined(track, 'tissue') && track.tissue.trim().length;
+        const librarySizeResult =
+            isNotNullOrUndefined(track, 'library_size') &&
+            track.library_size.trim().length &&
+            isValidNumber(track.library_size);
+        const srrIdResult = isNotNullOrUndefined(track, 'srr_id') && track.srr_id.trim().length;
 
-        return datasetResult && speciesResult && sequencingTypeResult && fileLocationResult && tissueResult;
+        return (
+            datasetResult &&
+            speciesResult &&
+            sequencingTypeResult &&
+            fileLocationResult &&
+            librarySizeResult &&
+            srrIdResult
+        ); // && tissueResult;
     };
 
     const isValidEditorTrack = (track) => {
         // Editor Required Fields = dataset, species, sequencing_type, file_location, tissue, (These 5 checked by isValidAdminTrack())
-        //                          track_name, mutant, sex, author,
-        //                          total_mapped, percent_aligned, percent_uniquely_mapped
+        //                          track_name, mutant, sex, author, srr_id,
+        //                          number_mapped, library_size, percent_aligned, percent_uniquely_mapped
 
         // We can re-use the admin function here so we don't have to rewrite those particular checks
         const adminResult = isValidAdminTrack(track);
@@ -111,10 +124,10 @@ const EditTracks = ({
         const authorResult = isNotNullOrUndefined(track, 'author') && track.author.trim().length;
 
         // Extra check here to ensure the input is actually a number
-        const totalMappedResult =
-            isNotNullOrUndefined(track, 'total_mapped') &&
-            track.total_mapped.trim().length &&
-            isValidNumber(track.total_mapped);
+        const numberMappedResult =
+            isNotNullOrUndefined(track, 'number_mapped') &&
+            track.number_mapped.trim().length &&
+            isValidNumber(track.number_mapped);
         const percentAlignedResult =
             isNotNullOrUndefined(track, 'percent_aligned') &&
             track.percent_aligned.trim().length &&
@@ -130,7 +143,7 @@ const EditTracks = ({
             mutantResult &&
             sexResult &&
             authorResult &&
-            totalMappedResult &&
+            numberMappedResult &&
             percentAlignedResult &&
             percentUniquelyMappedResult
         );

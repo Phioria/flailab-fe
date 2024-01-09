@@ -80,7 +80,7 @@ const Upload = () => {
                         <strong>dataset</strong>, <strong>species</strong>, <strong>track_name</strong>,{' '}
                         <strong>sequencing_type</strong>, <strong>file_location</strong>, <strong>mutant</strong>,{' '}
                         <strong>tissue</strong>, <strong>sex</strong>, <br />
-                        <strong>total_mapped</strong>, <strong>percent_aligned</strong>,{' '}
+                        <strong>number_mapped</strong>, <strong>library_size</strong>, <strong>percent_aligned</strong>,{' '}
                         <strong>percent_uniquely_mapped</strong>, <strong>author</strong>, cell_line, <br />
                         development_stage, project, paper, srr_id, notes, file_name, file_type, <br />
                         paired_single_ended, unmapped_reads, splice_reads, non_splice_reads, <br />
