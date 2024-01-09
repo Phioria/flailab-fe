@@ -139,10 +139,14 @@ const Register = () => {
             {success ? (
                 <main className="container-fluid d-flex flex-column justify-content-start">
                     <section className="container-fluid d-flex flex-grow-1 flex-column mt-5 mx-4">
-                        <h1>Success!</h1>
-                        <button className="mt-4 w-50 btn btn-warning">
-                            <Link to="/login">Sign In</Link>
-                        </button>
+                        <h1 className="text-center">Success!</h1>
+                        <p>
+                            Thanks for signing up! <br />
+                            Please check your Email for a link to validate your Email address.
+                        </p>
+                        <Link to="/login" className="mt-4 w-50 btn btn-warning" role="button">
+                            Sign In
+                        </Link>
                     </section>
                 </main>
             ) : (
