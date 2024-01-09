@@ -58,6 +58,10 @@ section {
     box-shadow: 5px 5px 10px 0 black;
 }
 
+section a {
+    color: #000;
+}
+
 form {
     display: flex;
     flex-direction: column;

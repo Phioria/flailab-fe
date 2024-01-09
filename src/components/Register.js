@@ -144,7 +144,7 @@ const Register = () => {
             <Header />
             {isLoading ? (
                 <div
-                    className="d-flex justify-content-center"
+                    className="d-flex justify-content-center mt-3"
                     aria-label="Spinning DNA molecule representing that tracks are loading"
                 >
                     <img src="/dna.svg" alt="DNA molecule" />
@@ -153,13 +153,15 @@ const Register = () => {
                 <main className="container-fluid d-flex flex-column justify-content-start">
                     <section className="container-fluid d-flex flex-grow-1 flex-column mt-5 mx-4">
                         <h1 className="text-center">Success!</h1>
-                        <p>
+                        <p className="text-center">
                             Thanks for signing up! <br />
                             Please check your Email for a link to validate your Email address.
                         </p>
-                        <Link to="/login" className="mt-4 w-50 btn btn-warning" role="button">
-                            Sign In
-                        </Link>
+                        <p className="text-center">
+                            <Link to="/login" className="mt-4 w-50 btn btn-warning" role="button">
+                                Sign In
+                            </Link>
+                        </p>
                     </section>
                 </main>
             ) : (
