@@ -30,6 +30,9 @@ const Register = () => {
     // Using to place focus on the error in case one occurs
     const errRef = useRef();
 
+    // State for waiting for registration response
+    const [isLoading, setIsLoading] = useState(false);
+
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
@@ -100,6 +103,7 @@ const Register = () => {
             return;
         }
         try {
+            setIsLoading(true);
             // eslint-disable-next-line
             const response = await axios.post(
                 REGISTER_URL,
@@ -130,13 +134,22 @@ const Register = () => {
                 setErrMsg('Registration Failed');
             }
             errRef.current.focus();
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
         <>
             <Header />
-            {success ? (
+            {isLoading ? (
+                <div
+                    className="d-flex justify-content-center"
+                    aria-label="Spinning DNA molecule representing that tracks are loading"
+                >
+                    <img src="/dna.svg" alt="DNA molecule" />
+                </div>
+            ) : success ? (
                 <main className="container-fluid d-flex flex-column justify-content-start">
                     <section className="container-fluid d-flex flex-grow-1 flex-column mt-5 mx-4">
                         <h1 className="text-center">Success!</h1>
