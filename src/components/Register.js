@@ -158,7 +158,7 @@ const Register = () => {
                             Please check your Email for a link to validate your Email address.
                         </p>
                         <p className="text-center">
-                            <Link to="/login" className="mt-4 w-50 btn btn-warning" role="button">
+                            <Link to="/login" className="mt-4 w-50 btn btn-warning text-dark" role="button">
                                 Sign In
                             </Link>
                         </p>

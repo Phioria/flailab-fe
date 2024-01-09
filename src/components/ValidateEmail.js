@@ -54,11 +54,13 @@ const ValidateEmail = () => {
             {isLoading && <img src="dna.svg" alt="DNA Double Helix Roatating" />}
             {success ? (
                 <main className="contain-fluid d-flex flex-column justify-content-start">
-                    <section className="contain-fluid d-flex flex-grow-1 flex-column mt-5 px-4">
+                    <section className="contain-fluid d-flex flex-grow-1 flex-column mt-5 text-center">
                         <h3 className="py-4">Account Validated!</h3>
-                        <button onClick={gotoLogin} className="mt-4 w-50 btn btn-warning">
-                            Sign In
-                        </button>
+                        <div className="text-center">
+                            <button onClick={gotoLogin} className="mt-4 w-50 btn btn-warning">
+                                Sign In
+                            </button>
+                        </div>
                     </section>
                 </main>
             ) : (
