@@ -253,10 +253,10 @@ const EditTracks = ({
                             <th>Sex</th>
                             <th>Paper</th>
                             <th>SRR ID</th>
-                            <th>Total Mapped</th>
+                            <th>Number Mapped</th>
+                            <th>Library Size</th>
                             <th>Percent Aligned</th>
                             <th>Percent Uniquely Mapped</th>
-                            <th>Submitted By</th>
                             <th>Author</th>
                             <th>Project</th>
                             <th>File Type</th>
@@ -267,6 +267,7 @@ const EditTracks = ({
                             <th>Non-Splice Reads</th>
                             <th>Reads Mapped to +</th>
                             <th>Reads Mapped to -</th>
+                            <th>Submitted By</th>
                         </tr>
                     </thead>
                     <tbody>
