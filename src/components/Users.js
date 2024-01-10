@@ -32,7 +32,6 @@ const Users = () => {
                 const response = await axiosPrivate.get('/users', {
                     signal: newAbortSignal(5000),
                 });
-                console.log(response.data);
                 isMounted && setUsers(response.data);
             } catch (err) {
                 console.error(err);
@@ -87,7 +86,6 @@ const Users = () => {
                 signal: newAbortSignal(5000),
             });
             setUsers(users.filter((user) => user.uid !== deleteUser.id));
-            console.log(response.data);
         } catch (err) {
             console.log(err);
         }
@@ -119,12 +117,9 @@ const Users = () => {
                 PAYLOAD['Admin'] = 2600;
             }
 
-            console.log(PAYLOAD);
-
             const response = await axiosPrivate.put(UPDATE_URL, PAYLOAD, {
                 signal: newAbortSignal(5000),
             });
-            console.log(response);
             // TODO: Update the user in state to have the correct new roles
         } catch (err) {
             console.log(err);

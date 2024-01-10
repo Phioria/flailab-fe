@@ -157,10 +157,8 @@ const EditTracks = ({
         // We can deal with most of these issues directly in the EditTracksRow component by using validation there before they are even submitted
         // But this will be a good final check before it heads to the server
         // If everything looks good, then use axiosprivate to submit a put request with the data object set in the second param
-        //console.log(submitTracks);
 
         const roles = auth?.roles;
-        console.log(`Roles: ${JSON.stringify(roles)}`);
 
         const highestRole = Math.max(...Object.values(roles));
         if (highestRole !== 2600 && highestRole !== 1999) {
@@ -236,7 +234,7 @@ const EditTracks = ({
                 </Modal.Footer>
             </Modal>
             <Container>
-                <form id="edit-form"></form> {/* onSubmit={console.log('Testing')} */}
+                <form id="edit-form"></form>
                 <Table striped bordered hover>
                     <thead>
                         <tr>

@@ -16,7 +16,6 @@ const Reset = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Handle Submit');
 
         const v1 = USER_REGEX.test(user);
         if (!v1) {

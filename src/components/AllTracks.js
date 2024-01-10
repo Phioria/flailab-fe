@@ -122,11 +122,6 @@ const AllTracks = () => {
             }
         };
 
-        if (searching) {
-            console.log('made it here');
-            console.log(`searchTerms: ${JSON.stringify(searchTerms)}`);
-        }
-
         getTracks();
 
         return () => {
@@ -152,7 +147,6 @@ const AllTracks = () => {
                     // And add each of those to selectedTracks
                     const startIndex = previousBox < currentBox ? previousBox + 1 : currentBox + 1; // Since the previousBox has been added to selectedTracks and already checked
                     const endIndex = previousBox < currentBox ? currentBox - 1 : previousBox - 1; // Since the currentBox will have been checked already HOWEVER it won't have been added to selected tracks yet
-                    console.log(`Start: ${startIndex} | End: ${endIndex}`);
                     let newIds = [];
                     for (let i = startIndex; i <= endIndex; i++) {
                         const boxName = i.toString();
@@ -174,13 +168,11 @@ const AllTracks = () => {
         } else {
             // Handle unchecking a box
             // previousBox can't be null if you're deselecting a box...no need to check for it
-            console.log(`currentBox: ${currentBox} | previousBox: ${previousBox}`);
             if (e.nativeEvent.shiftKey && Math.abs(currentBox - previousBox) !== 1) {
-                console.log('true');
                 const startIndex = previousBox < currentBox ? previousBox + 1 : currentBox + 1;
                 const endIndex = previousBox < currentBox ? currentBox - 1 : previousBox - 1;
-                console.log(`Start: ${startIndex} | End: ${endIndex}`);
                 let removeIds = [];
+
                 for (let i = startIndex; i <= endIndex; i++) {
                     const boxName = i.toString();
                     const box = document.getElementsByName(boxName)[0];
@@ -254,7 +246,6 @@ const AllTracks = () => {
             });
 
             const remainingTracks = tracks.filter((track) => !selectedTracks.includes(track.rid));
-            //console.log(`Remaining Tracks: ${remainingTracks.length}`);
             setTracks(remainingTracks);
             setSuccessMsg(
                 selectedTracks.length > 1
@@ -326,13 +317,10 @@ const AllTracks = () => {
     };
 
     const handleEditTracks = () => {
-        console.log(selectedTracks);
         setShowEdit(true);
     };
 
     const handleSearch = () => {
-        //console.log(`currentSearchTerm: ${JSON.stringify(currentSearchTerm)}`);
-        //console.log(`searchTerms: ${searchTerms}`);
         if (currentSearchTerm['column'] == '') return; // This should disable searching if a user hasn't selected a column yet
         formRef.current.reset();
 

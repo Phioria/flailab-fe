@@ -46,7 +46,6 @@ const ResetLink = () => {
                 const response = await axios.get(`${URL}/${id}/${token}`, {
                     signal: controller.signal,
                 });
-                console.log(response);
                 isMounted && setSuccess(true);
             } catch (err) {
                 console.error(err);

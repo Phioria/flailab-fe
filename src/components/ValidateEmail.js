@@ -27,7 +27,6 @@ const ValidateEmail = () => {
                     signal: controller.signal,
                 });
 
-                console.log(response);
                 isMounted && setSuccess(true);
             } catch (err) {
                 console.error(err);
