@@ -189,6 +189,12 @@ button {
     margin: 0;
 }
 
+@media (max-width: 550px) {
+    .jumbotron {
+        height: 100vh;
+    }
+}
+
 .jumbotron .btn-warning {
     background: #ffbe26;
     border-color: #000;
