@@ -15,7 +15,7 @@ const USER_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 // (?=.*[0-9]) Must contain at least 1 digit
 // (?=.*[!@#$%]) Must contain at least 1 of the listed special characters
 // .{8,24}$ The total length of the password must be between 8 and 24 characters
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,24}$/;
 
 // Allow for First or Last names to be between 1 and 20 characters
 // Allow any characters except the ones below

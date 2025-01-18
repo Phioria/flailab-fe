@@ -7,7 +7,7 @@ import Header from './Header';
 const URL = '/auth';
 const UPDATE_PWD_URL = '/auth/teser';
 
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,24}$/;
 
 const ResetLink = () => {
     const { id, token } = useParams();
