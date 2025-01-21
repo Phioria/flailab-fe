@@ -15,10 +15,16 @@ import Upload from './components/Upload';
 import Reset from './components/Reset';
 import ResetLink from './components/ResetLink';
 
-const ROLES = {
+/*const ROLES = {
     User: process.env.REACT_APP_ROLES_USER,
     Editor: process.env.REACT_APP_ROLES_EDITOR,
     Admin: process.env.REACT_APP_ROLES_ADMIN,
+};*/
+
+const ROLES = {
+    User: 1500,
+    Editor: 1999,
+    Admin: 2600,
 };
 
 function App() {
